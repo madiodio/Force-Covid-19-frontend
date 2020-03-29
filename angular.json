@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "force-Covid19-frontend": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "force-Covid19-frontend"
+    }
+  },
+  "defaultProject": "force-Covid19-frontend",
+  "cli": {
+    "analytics": "e365fe7c-585e-4c91-b8ac-1191ee0c6494"
+  }
 }
