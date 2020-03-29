@@ -18,6 +18,8 @@ export class GlobalService {
   UPLOAD_FILE = '/upload/images';
   DOWNLOAD_FILE = this.BASE_API_URL + '/files/download/images';
   FILE = this.BASE_API_URL + '/files';
+
+  ALLOCATION_URL=this.BASE_API_URL+'/allocations';
   
   constructor() { }
 }
