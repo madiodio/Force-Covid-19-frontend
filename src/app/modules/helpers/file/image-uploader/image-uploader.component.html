@@ -1,0 +1,24 @@
+<!--
+<div class="form-group image-upload-wrapper">
+  <label>{{label}}</label>
+  <span class="uploading" *ngIf="uploading"></span>
+  <div *ngIf="files.length < limit">
+    <input [hidden]="files.length > limit" #fileInput (change)="onFileChange(fileInput)" type="file" id="{{elementId}}"
+           [multiple]="false" >
+    <p class="help-block">{{description}}.</p>
+  </div>
+
+  <p *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</p>
+  
+  <ul *ngIf="files.length" class="uploaded-images">
+    <li *ngFor="let file of files; let i = index">
+       
+      <img src='{{  getFileUrl(file.name) }}' alt=""/>
+       
+      <span title="Delete" (click)="onDeleteFile(i)" class="delete"><i class="fa fa-trash"></i></span>
+
+    </li>
+  </ul>
+   
+</div>
+-->
