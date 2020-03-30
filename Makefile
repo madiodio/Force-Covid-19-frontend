@@ -3,7 +3,7 @@ TAG ?= $(shell git log -1 --format=%h)
 CURRENTDIR ?= $(shell pwd)
 
 APP_VERSION = v.$(VERSION).${TAG}
-APP_NAME = force-Covid19-frontend
+APP_NAME = force-covid19-frontend
 ORGANISATION_NAME = beopenit
 
 
