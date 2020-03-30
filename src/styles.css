@@ -1,15 +1,287 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --force-covid19-primary-color: #379956;
-    --force-covid19-secondary-color: #EF255F;
-    --force-covid19-tertiary-color: #FFC85B;
-    --primary-green: #379956;
-    --primary-red: #EF255F;
-    --primary-yellow: #FFC85B;  
-  }
+  --force-covid19-primary-color: #379956;
+  --force-covid19-secondary-color: #ef255f;
+  --force-covid19-tertiary-color: #ffc85b;
+  --force-covid19-primary-textColor: #000;
+  --colors-textColor: #000;
+  --colors-green: #379956;
+  --colors-red: #ef255f;
+  --colors-yellow: #ffc85b;
+  --colors-teal-light: #b8e1dd;
+  --colors-teal-brght: #49beb7;
 
- /* exemple
+  --xs-viewport: 416px;
+  --sm-viewport: 672px;
+  --md-viewport: 880px;
+  --lg-viewport: 1196px;
+
+  --spacing-content-padding-xs: 8px;
+  --spacing-content-padding-sm: 12px;
+  --spacing-content-padding-md: 16px;
+  --spacing-content-padding-lg: 24px;
+  --spacing-content-padding-xl: 32px;
+}
+
+/* exemple
   .home-button {
       background-color: var(--force-covid19-primary-color);
   }
   */
+
+html {
+  line-height: 1.15;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-feature-settings: "calt", "clig", "kern", "liga", "locl", "rlig";
+  color: var(--force-covid19-primary-textColor);
+  font-size: 1rem;
+}
+
+.ui-widget {
+  font-family: inherit !important;
+}
+
+/* COLORS */
+
+.color-primary {
+  color: var(--force-covid19-primary-color);
+}
+
+.color-secondary {
+  color: var(--force-covid19-secondary-color);
+}
+
+.color-tertiary {
+  color: var(--force-covid19-tertiary-color);
+}
+
+.color-white {
+  color: white;
+}
+
+.bgColor-teal-light {
+  background-color: var(--colors-teal-light);
+  color: var(--colors-textColor);
+}
+
+.bgColor-primary {
+  background-color: var(--colors-green) !important;
+  color: white !important;
+}
+
+/* Page Sections*/
+.page-section:not(.hero) {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 4px;
+}
+
+.grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  justify-content: space-between;
+  flex: 0 1 auto;
+}
+
+.grid-row.align-end {
+  align-items: flex-end;
+}
+
+.grid-column {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.grid-column.column-2 {
+}
+
+.page-section-title {
+  font-size: 2rem;
+}
+
+.page-section-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 62rem) {
+  .grid-column {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .grid-column.column-1\/2 {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .grid-column.column-1\/3 {
+    flex-basis: 33.3333%;
+    max-width: 33.3333%;
+  }
+
+  .grid-row.spaced > .grid-column.column-1\/3 {
+    flex-basis: 32%;
+    max-width: 32%;
+  }
+
+  .grid-column.column-1\/4 {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+
+  .grid-column.column-3\/4 {
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+}
+
+@media (min-width: var(--md-viewport)) {
+  .grid-column.column-1\/3 {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .grid-column.column-1\/4 {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 42rem) {
+  .page-section:not(.hero) {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    margin-bottom: 8px;
+  }
+  .grid-column {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.page-section-card {
+  padding-left: var(--spacing-content-padding-sm);
+  padding-right: var(--spacing-content-padding-sm);
+  padding-top: var(--spacing-content-padding-sm);
+  padding-bottom: var(--spacing-content-padding-sm);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 6px;
+}
+
+.page-section-cardImage {
+  width: 70%;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.page-section-cardImage > img {
+  height: auto;
+  width: inherit;
+}
+
+.page-section-cardContent {
+  padding: calc(var(--spacing-content-padding-lg) / 2);
+}
+
+.page-section-cardContent > p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.page-section-cardFooter {
+  padding: var(--spacing-content-padding-sm);
+}
+
+@media (min-width: var(--xs-medium)) {
+  .page-section-card {
+    padding-left: var(--spacing-content-padding-lg);
+    padding-right: var(--spacing-content-padding-lg);
+    padding-top: var(--spacing-content-padding-lg);
+    padding-bottom: var(--spacing-content-padding-lg);
+  }
+}
+
+.button {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 4px;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  padding: 0.68rem 1.5rem;
+  font-size: 1rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.025rem;
+}
+
+.hero-content {
+  padding: 2rem;
+  height: 170px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--force-covid19-tertiary-color);
+  background-position: center center;
+  max-width: 100vw;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (min-width: 62rem) {
+  .hero-content {
+    padding: 1rem 3rem;
+    height: 292px;
+    max-width: 60vw;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.spacer-xy {
+  margin: var(--spacing-content-padding-lg) 0;
+}
