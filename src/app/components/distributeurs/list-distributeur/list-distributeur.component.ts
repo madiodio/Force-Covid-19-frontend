@@ -10,43 +10,50 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './list-distributeur.component.html',
   styleUrls: ['./list-distributeur.component.css']
 })
-export class ListDistributeurComponent implements OnInit, OnDestroy {
+export class ListDistributeurComponent implements OnInit {
+  
+  listItems: Distributeur[];
+  cols: any[];
 
-  distributeurs: Distributeur[];
-  searchCriteria: SearchCriteria= new SearchCriteria();
-  searchCriteriaSubject: Subject<SearchCriteria>= new Subject<SearchCriteria>();
-  distributeurSubscription: Subscription;
-  searchCriteriaSubscription: Subscription;
+  selectedItems: Distributeur[];
+
+  loading: boolean = true;
+
+  query = new SearchCriteria();
+
   constructor(private distributeurService: DistributeurService) { }
 
   ngOnInit(): void {
-    this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(
-      (distributeurs: Distributeur[])=>{
-        this.distributeurs=distributeurs;
-      }
-    );
-    this.searchCriteria.page=1;
-    this.searchCriteria.size=10;
-    this.distributeurService.getDistributeurs(this.searchCriteria);
-    this.searchCriteriaSubscription=this.searchCriteriaSubject.pipe(debounceTime(500),distinctUntilChanged()).subscribe(
-      (searchCriteria: SearchCriteria)=>{
-        this.distributeurService.getDistributeurs(searchCriteria);
-      }
-    )
+
+    this.cols = [
+      { field: 'manager', header: 'Nom' },
+      { field: 'address', header: 'Adresse' },
+      { field: 'coverage', header: 'Zone geographique' },
+      { field: 'storage', header: 'Stock' },
+      { field: 'address', header: 'Commune' },
+      { field: 'address', header: 'Ville' },
+      { field: 'address', header: 'Région' }
+    ];
+    this.distributeurService.getDistributeurs(this.query);
+    this.listItems = this.distributeurService.distributeurs;
+    this.loadFakeData();
   }
 
-  ngOnDestroy(){
-    if(this.distributeurSubscription){
-      this.distributeurSubscription.unsubscribe();
+  removeItme(id){
+    console.log(id);
+  }
+
+  loadFakeData() {
+    this.listItems = [];
+    for (let i = 1; i <= 20; i++) {
+      let bene = new Distributeur();
+      bene.id = '' + i;
+      bene.manager = 'Nom ' + i;
+      bene.address = 'Adresse ' + i;
+      bene.coverage = 'Zone geographique' + i;
+      bene.storage = 'stock ' + i;
+      this.listItems.push(bene);
     }
-    if(this.searchCriteriaSubscription){
-      this.searchCriteriaSubscription.unsubscribe();
-    }
-  }
 
-  //Call this method in form filter template
-  onSetSearchCriteria(){
-    this.searchCriteriaSubject.next(this.searchCriteria);
   }
-
 }
