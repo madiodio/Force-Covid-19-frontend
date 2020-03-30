@@ -28,7 +28,7 @@ spec:
         run: force-covid19-frontend
     spec:
       containers:
-      - image: beopenit/force-covid19-frontend:v.0.0.1.6c42f8b
+      - image: beopenit/force-covid19-frontend:v.0.0.1.13e6046
         imagePullPolicy: Always
         name: force-covid19-frontend
         ports:
