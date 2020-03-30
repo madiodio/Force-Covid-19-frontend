@@ -10,7 +10,8 @@
 /* Header */
 .header {
     padding: 16px 50px 0 50px;
-    height: 81px;
+    height: 90px;
+    vertical-align: middle;
 }
 
 .header > div:first-child {
@@ -38,8 +39,8 @@
 
 .user {
     text-align: center;
-    height: 81px;
-    margin-top: 40px;
+    height: 100%;
+    margin-top: 25px;
     text-align: left;
     padding: 0 !important;
     vertical-align: middle;
@@ -92,7 +93,7 @@
 /* Custom Menu Item */
 ::ng-deep .ui-menubar {
     text-align: right;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 ::ng-deep .ui-menuitem {

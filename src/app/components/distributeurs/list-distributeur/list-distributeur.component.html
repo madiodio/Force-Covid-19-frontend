@@ -1,3 +1,11 @@
+<section class="page-section hero distributeur container">
+  <div class="hero-content">
+    <h1 class="color-white">Distribution partout au Sénégal</h1>
+  </div>
+</section>
+
+<div class="spacer-xy"></div>
+
 <div class="p-grid">
     <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
         <ng-template pTemplate="caption">
@@ -21,15 +29,15 @@
                     {{rowData[col.field]}}
                 </td>
                 <td>
-                    <div>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
-                        <i class="pi pi-eye" style="font-size: 3em"></i>
+                    <div class="table_actions">
+                      <a class="dropdown-item show" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
+                        <i class="pi pi-eye"></i>
                       </a>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
-                        <i class="pi pi-pencil" style="font-size: 3em"></i>
+                      <a class="dropdown-item edit" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
+                        <i class="pi pi-pencil"></i>
                       </a>
-                      <a class="dropdown-item" (click)="removeItme(rowData.id)" title="Supprimer">
-                        <i class="pi pi-trash" style="font-size: 3em"></i>
+                      <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
+                        <i class="pi pi-trash"></i>
                       </a>
   
                     </div>
