@@ -1,8 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "3"
+    fluxcd.io/automated: 'true'
   labels:
     run: force-covid19-frontend
   name: force-covid19-frontend
@@ -21,12 +23,12 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
+      creationTimestamp:
       labels:
         run: force-covid19-frontend
     spec:
       containers:
-      - image: beopenit/force-covid19-frontend
+      - image: beopenit/force-covid19-frontend:v.0.0.1.033401f
         imagePullPolicy: Always
         name: force-covid19-frontend
         ports:
