@@ -1,1 +1,48 @@
-<p>form-beneficiaire works!</p>
+<p-dialog [(visible)]="display" [style]="{width: '60vw'}">
+  <p-header>
+    Ajout d'un bénéficiaire
+  </p-header>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form-wrapper">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Nom Bénéficiaire</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Salaire Mensuel</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Nbre d'enfants</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-3">
+        <label class="form-label" for="">Nbre personnes agées</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Contact</label>
+        <input class="form-input" type="text" formControlName="phoneNumber">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Adresse</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label class="form-label" for="">Coordonnées GPS</label>
+        <input class="form-input" type="text" formControlName="firstname">
+      </div>
+      <div class="p-col-12">
+        <p-checkbox name="groupname" value="val1" formControlName="firstname" label="Activez la géolocalisation">
+        </p-checkbox>
+      </div>
+      <div class="p-col-12 txt-align-center">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+
+<button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Ajouter un
+  Bénéficiaire</button>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+import { BeneficiaireService } from '../../../services/beneficiaire.service';
+
 
 @Component({
   selector: 'app-form-beneficiaire',
@@ -6,10 +10,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-beneficiaire.component.css']
 })
 export class FormBeneficiaireComponent implements OnInit {
+  display: boolean = false;
+  form: FormGroup;
 
-  constructor() { }
+
+  constructor(private beneficiaireService: BeneficiaireService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      lastname: [''],
+      firstname: [''],
+      pieceDIdentite: [''],
+      phoneNumber: [''],
+      email: [''],
+      role: [''],
+    });
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  onSubmit() {
+    console.log((this.form.value))
+    // this.beneficiaireService.addBeneficiaire(this.form.value);
   }
 
 }
