@@ -8,23 +8,11 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th *ngFor="let col of columns">
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
                     {{col.header}}
+                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                 </th>
                 <th> Action</th>
-            </tr>
-            <tr>
-                <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                    <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                    <div *ngSwitchCase="'year'">
-                        Value > {{yearFilter}}
-                        <i class="pi pi-times" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="yearFilter"></i>
-                        <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="1970" [max]="2010" (onChange)="onYearChange($event, dt)"></p-slider>
-                    </div>
-                    <p-dropdown *ngSwitchCase="'brand'" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                    <p-multiSelect *ngSwitchCase="'color'" [options]="colors" defaultLabel="All Colors" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
-                    <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt.filter($event.target.value, col.field, 'custom')">
-                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">

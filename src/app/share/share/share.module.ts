@@ -13,6 +13,8 @@ import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { SliderModule } from 'primeng/slider';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { CalendarModule } from 'primeng/calendar';
     ProgressBarModule,
     DropdownModule,
     CalendarModule,
+    SliderModule,
+    MultiSelectModule,
   ],
   exports: [
     FormsModule,
@@ -39,6 +43,8 @@ import { CalendarModule } from 'primeng/calendar';
     ProgressBarModule,
     DropdownModule,
     CalendarModule,
+    SliderModule,
+    MultiSelectModule,
   ]
 })
 export class ShareModule { }
