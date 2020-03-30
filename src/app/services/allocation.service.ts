@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Allocation } from './../models/allocation';
 import { Injectable } from '@angular/core';
+import { SearchCriteria } from '../models/search-critaria';
 
 
 @Injectable({
@@ -10,9 +11,9 @@ import { Injectable } from '@angular/core';
 })
 export class AllocationService {
   baseUrl: string;
-
   allocations: Allocation[];
   allocationsSubject = new Subject<Allocation[]>();
+  searchCriteria: any;
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.ALLOCATION_URL;
@@ -22,8 +23,15 @@ export class AllocationService {
     this.allocationsSubject.next(this.allocations);
   }
 
-  async getAllocations() {
-    this.http.get<any>(this.baseUrl).subscribe(
+  getAllocations(searchCriteria?: SearchCriteria) {
+    let url: string=this.baseUrl;
+    if(searchCriteria){
+      url=this.global.prepareUrlWithSearchCriteria(this.baseUrl,searchCriteria);
+      this.searchCriteria= searchCriteria;
+    }else{
+      this.searchCriteria=null;
+    }
+    this.http.get<any>(url).subscribe(
       (allocations: any) => {
         this.allocations=allocations
         this.emitAllocations();
@@ -34,7 +42,6 @@ export class AllocationService {
       }
     )
   }
-
 
   async getAllocation(id: string) {
     return new Promise(
@@ -58,7 +65,11 @@ export class AllocationService {
         this.http.post<any>(this.baseUrl, JSON.stringify(allocation)).subscribe(
           (response: any) => {
             resolve(response);
-            this.getAllocations();
+            if(this.searchCriteria){
+              this.getAllocations(this.searchCriteria);
+            }else{
+              this.getAllocations();
+            }
           }, (error: any) => {
             reject(error);
           }
@@ -75,7 +86,11 @@ export class AllocationService {
         this.http.put<any>(this.baseUrl + allocation.id, JSON.stringify(allocation)).subscribe(
           (response: any) => {
             resolve(response);
-            this.getAllocations();
+            if(this.searchCriteria){
+              this.getAllocations(this.searchCriteria);
+            }else{
+              this.getAllocations();
+            }
           }, (error: any) => {
             reject(error);
           }
@@ -91,7 +106,11 @@ export class AllocationService {
         this.http.delete<any>(this.baseUrl + id).subscribe(
           (response: any) => {
             resolve(response);
-            this.getAllocations();
+            if(this.searchCriteria){
+              this.getAllocations(this.searchCriteria);
+            }else{
+              this.getAllocations();
+            }
           }, (error: any) => {
             reject(error);
           }

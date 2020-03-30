@@ -23,7 +23,7 @@ import { environment } from '../environments/environment';
 import { HelpersModule } from './modules/helpers/helpers.module';
 import { FileService } from './modules/helpers/file/file.service';
 import { RequestCacheService } from './modules/helpers/services/request-cache.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CachingInterceptorService } from './modules/helpers/services/caching-interceptor.service';
 import { BeneficiairesModule } from './components/beneficiaires/beneficiaires.module';
 import { AllocationsModule } from './components/allocations/allocations.module';
@@ -43,6 +43,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     MenubarModule,
     InputTextModule,
     ButtonModule,
