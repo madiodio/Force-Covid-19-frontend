@@ -1,3 +1,0 @@
-namespace: front
-bases:
-  - ./workloads/
