@@ -1,0 +1,4 @@
+<div class="gallery">
+    <div *ngFor="let photo of photos" class="gallery-item" [ngStyle]="{'background-image': 'url( '+ getFileUrl(photo.name)+')'}">
+    </div>
+  </div>

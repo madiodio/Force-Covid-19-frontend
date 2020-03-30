@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --force-covid19-primary-color: #379956;
+    --force-covid19-secondary-color: #EF255F;
+    --force-covid19-tertiary-color: #FFC85B;
+    --primary-green: #379956;
+    --primary-red: #EF255F;
+    --primary-yellow: #FFC85B;  
+  }
+
+ /* exemple
+  .home-button {
+      background-color: var(--force-covid19-primary-color);
+  }
+  */
