@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { customItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  items: MenuItem[];
+  items: customItem[];
 
   constructor() { }
 
@@ -15,33 +15,46 @@ export class HeaderComponent implements OnInit {
     this.items = [
       {
         label: 'Accueil',
-        icon: 'pi pi-fw pi-file',
-       
+        icon: 'pi pi-home',
+        routerLink: [''],
+            routerLinkActiveOptions: {
+              exact: true
+            },
+        styleClass: 'customItem',
       },
       {
         label: 'Stock',
-        icon: 'pi pi-fw pi-pencil',
-       
+        icon: 'pi pi-images',
+        routerLink: ['stocks'],
+            routerLinkActiveOptions: {
+              exact: true
+            },
+        styleClass: 'customItem'
       },
       {
         label: 'Distributeurs',
-        icon: 'pi pi-fw pi-question',
-  
+        icon: 'pi pi-users',
+        routerLink: ['distributeurs'],
+            routerLinkActiveOptions: {
+              exact: true
+            },
+        styleClass: 'customItem'
       },
       {
         label: 'Bénéficiaires',
-        icon: 'pi pi-fw pi-cog',
-        
+        icon: 'pi pi-id-card',
+        routerLink: ['beneficiaires'],
+            routerLinkActiveOptions: {
+              exact: true
+            },
+        styleClass: 'customItem'
       },
       {
         label: 'Statistiques',
-        icon: 'pi pi-fw pi-cog',
-        
+        icon: 'pi pi-chart-bar',
+        styleClass: 'customItem'
       },
       { separator: true },
-      {
-        label: 'Quit', icon: 'pi pi-fw pi-times'
-      }
     ];
   }
 }
