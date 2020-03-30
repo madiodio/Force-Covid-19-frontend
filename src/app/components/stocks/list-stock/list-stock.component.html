@@ -1,3 +1,30 @@
+<!-- <div class="p-grid">
+    <div class="p-col-8"> 
+
+        <form class="filter">
+            <label for="prod">Produit</label>
+            <select id="prod">
+                <option value="">Choisir un produit</option>
+                <option value="">Produit 1</option>
+                <option value="">Produit 2</option>
+                <option value="">Produit 3</option>
+            </select>
+            <label for="cat">Catégorie</label>
+            <select id="cat">
+                <option value="">Choisir une catégorie</option>
+                <option value="">Produit 1</option>
+                <option value="">Produit 2</option>
+                <option value="">Produit 3</option>
+            </select>
+        </form>
+    </div>
+    <div class="p-col-2">
+        <div class="box">
+            <input type="button" value="Ajouter" />
+        </div>
+    </div>
+</div> -->
+
 <div class="p-grid">
     <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
         <ng-template pTemplate="caption">
@@ -21,15 +48,15 @@
                     {{rowData[col.field]}}
                 </td>
                 <td>
-                    <div>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
-                        <i class="pi pi-eye" style="font-size: 3em"></i>
+                    <div class="table_actions">
+                      <a class="dropdown-item show" routerLink="/beneficiaires/{{rowData.id}}/details" title="Voir détails">
+                        <i class="pi pi-list"></i>
                       </a>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
-                        <i class="pi pi-pencil" style="font-size: 3em"></i>
+                      <a class="dropdown-item edit" routerLink="/beneficiaires/{{rowData.id}}/update" title="Mettre la quantité à jour">
+                        <i class="pi pi-pencil"></i>
                       </a>
-                      <a class="dropdown-item" (click)="removeItme(rowData.id)" title="Supprimer">
-                        <i class="pi pi-trash" style="font-size: 3em"></i>
+                      <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
+                        <i class="pi pi-trash"></i>
                       </a>
   
                     </div>

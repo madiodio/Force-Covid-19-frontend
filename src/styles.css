@@ -13,3 +13,36 @@
       background-color: var(--force-covid19-primary-color);
   }
   */
+
+/* Datatable Style */
+
+  form.filter label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+form.filter select {
+    width: 220px;
+    height: 50px;
+    border: solid 1.5px #000000;
+    background: white;
+}
+
+.table_actions {
+    font-size: 20px;
+    text-align: center;
+}
+
+.table_actions a {
+    padding: 0 5px;
+}
+
+.table_actions .show {
+    color: blue;
+}
+.table_actions .edit {
+    color : green;
+}
+.table_actions .delete {
+    color: red;
+}
