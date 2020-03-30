@@ -2,13 +2,13 @@ VERSION=0.0.1
 TAG ?= $(shell git log -1 --format=%h)
 CURRENTDIR ?= $(shell pwd)
 
-APP_VERSION = "v.$(VERSION).${TAG}"
-APP_NAME = "force-Covid19-frontend"
-ORGANISATION_NAME = "beopenit"
+APP_VERSION = v.$(VERSION).${TAG}
+APP_NAME = force-Covid19-frontend
+ORGANISATION_NAME = beopenit
 
 
-IMAGE_NAME = "${ORGANISATION_NAME}/${APP_NAME}"
-IMAGE_VERSION = "${IMAGE_NAME}:${APP_VERSION}"
+IMAGE_NAME = ${ORGANISATION_NAME}/${APP_NAME}
+IMAGE_VERSION = ${IMAGE_NAME}:${APP_VERSION}
 
 build_image:
 	@echo "Build docker image"
