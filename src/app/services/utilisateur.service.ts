@@ -1,7 +1,7 @@
+import { User } from './../models/user';
 import { GlobalService } from 'src/app/global.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { UtilisateurModel } from './../models/utilisateurs.model';
 import { Injectable } from '@angular/core';
 import { SearchCriteria } from '../models/search-critaria';
 
@@ -10,9 +10,9 @@ import { SearchCriteria } from '../models/search-critaria';
 })
 export class UtilisateurService {
   baseUrl: string;
-  utilisateurs: UtilisateurModel[];
+  utilisateurs: User[];
   searchCriteria: any;
-  utilisateursSubject = new Subject<UtilisateurModel[]>();
+  utilisateursSubject = new Subject<User[]>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.UTILISATEUR_URL;
@@ -58,7 +58,7 @@ export class UtilisateurService {
     );
   }
 
-  async addUtilisateur(utilisateur: UtilisateurModel) {
+  async addUtilisateur(utilisateur: User) {
     return new Promise(
       (resolve, reject) => {
         this.http.post<any>(this.baseUrl, JSON.stringify(utilisateur)).subscribe(
@@ -79,10 +79,30 @@ export class UtilisateurService {
   }
 
 
-  async updateUtilisateur(utilisateur: UtilisateurModel) {
+  async updateUtilisateur(utilisateur: User) {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getUtilisateurs(this.searchCriteria);
+            }else{
+              this.getUtilisateurs();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchUtilisateur(utilisateur: User) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + utilisateur.id, JSON.stringify(utilisateur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

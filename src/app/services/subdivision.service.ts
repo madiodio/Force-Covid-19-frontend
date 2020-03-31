@@ -99,6 +99,26 @@ export class SubdivisionService {
     );
   }
 
+  async patchSubdivision(subdivision: SubdivisionModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + subdivision.id, JSON.stringify(subdivision)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getSubdivisions(this.searchCriteria);
+            }else{
+              this.getSubdivisions();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteSubdivision(id: number) {
     return new Promise(
       (resolve, reject) => {

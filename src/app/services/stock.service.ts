@@ -99,6 +99,26 @@ export class StockService {
     );
   }
 
+  async patchStock(stock: Stock) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + stock.id, JSON.stringify(stock)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getStocks(this.searchCriteria);
+            }else{
+              this.getStocks();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteStock(id: number) {
     return new Promise(
       (resolve, reject) => {

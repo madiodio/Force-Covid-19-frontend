@@ -1,7 +1,8 @@
 export class DepartementModel{
-    id: string;
+    id: number;
     name: string;
     region: string;
+    subdivisions: string[];
 
     constructor(){}
 }

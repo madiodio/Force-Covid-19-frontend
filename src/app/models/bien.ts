@@ -1,10 +1,10 @@
 export class Bien {
-    id: string;
+    id: number;
     name: string;
     description: string;
+    weight: number;
+    unit: number;
     category: string;
-    weight: string;
-    unit: string;
 
     constructor(){}
 }

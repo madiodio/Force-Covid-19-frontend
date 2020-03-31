@@ -1,12 +1,11 @@
 export class Livreur {
-    id: string;
-    name: string;
-    manager: string;
-    coverage: string;
+    id: number;
+    completeName: string;
+    geographicalArea: string;
     deliveryCapacity: string;
-    numberOfDeliverer: string;
-    address:string;
-    phoneNumber: string;
+    numberOfActors: number;
+    adress: string;
+    mobileNumber: string;
     email: string;
 
     constructor(){}

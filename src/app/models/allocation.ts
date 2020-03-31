@@ -1,13 +1,13 @@
 export class Allocation {
-    id: string;
-    welfare: string;
-    status: string;
+    id: number;
+    status: number;
     created: string;
     updated: string;
-    deliverer: string
-    beneficiary: string
     confirmationCode: string;
-
+    items: string[];
+    beneficiary: string;
+    deliverer: string;
+    distributor: string;
     constructor(){}
 
 }

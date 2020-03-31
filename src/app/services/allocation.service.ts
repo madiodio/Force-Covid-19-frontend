@@ -100,6 +100,26 @@ export class AllocationService {
     );
   }
 
+  async patchAllocation(allocation: Allocation) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + allocation.id, JSON.stringify(allocation)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getAllocations(this.searchCriteria);
+            }else{
+              this.getAllocations();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteAllocation(id: number) {
     return new Promise(
       (resolve, reject) => {

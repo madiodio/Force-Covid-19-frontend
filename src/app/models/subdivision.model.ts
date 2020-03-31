@@ -1,6 +1,7 @@
 export class SubdivisionModel{
-    id: string;
+    id: number;
     name: string;
+    department: string;
 
     constructor(){}
 }
