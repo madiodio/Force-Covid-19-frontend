@@ -13,6 +13,7 @@ export class UtilisateurService {
   utilisateurs: User[];
   searchCriteria: any;
   utilisateursSubject = new Subject<User[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.UTILISATEUR_URL;
@@ -20,6 +21,10 @@ export class UtilisateurService {
 
   emitUtilisateurs() {
     this.utilisateursSubject.next(this.utilisateurs);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getUtilisateurs(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class UtilisateurService {
     }
     this.http.get<any>(url).subscribe(
       (utilisateurs: any) => {
-        this.utilisateurs=utilisateurs
+        this.utilisateurs=utilisateurs['hydra:member'];
+        this.emitTotalRecordsSubject(utilisateurs['hydra:totalItems'] as number);
         this.emitUtilisateurs();
       }, (error: any) => {
         console.log(error);
