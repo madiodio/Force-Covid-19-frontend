@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { BeneficiaireService } from '../../../services/beneficiaire.service';
+import { Beneficiaire } from 'src/app/models/beneficiaire';
 
 
 
@@ -13,6 +14,8 @@ import { BeneficiaireService } from '../../../services/beneficiaire.service';
 export class FormBeneficiaireComponent implements OnInit {
   form: FormGroup;
   @Input() display: boolean;
+  @Input() beneficiaire: Beneficiaire;
+
   @Output() displayChange = new EventEmitter();
 
 
@@ -33,12 +36,19 @@ export class FormBeneficiaireComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log((this.form.value))
+    if (this.beneficiaire) {
+      console.log("Update");
+      console.log(this.beneficiaire);
+      this.beneficiaire = null;
+    } else {
+      console.log("New")
+    }
     // this.beneficiaireService.addBeneficiaire(this.form.value);
   }
 
   onDialogHide() {
     this.displayChange.emit(false);
+    this.beneficiaire = null;
   }
 
   ngOnDestroy() {

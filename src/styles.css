@@ -353,3 +353,7 @@ body .ui-chkbox .ui-chkbox-box.ui-state-active, body .ui-chkbox .ui-chkbox-box.u
   background-color: #379956;
   border-color: #379956;
 }
+
+.txt-bold {
+  font-weight: bold;
+}

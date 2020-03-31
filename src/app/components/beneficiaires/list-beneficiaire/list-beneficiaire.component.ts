@@ -23,6 +23,7 @@ export class ListBeneficiaireComponent implements OnInit {
 
   displayDialog: boolean = false;
   displayDetailsDialog: boolean = false;
+  selectedData;
 
 
 
@@ -62,19 +63,23 @@ export class ListBeneficiaireComponent implements OnInit {
 
   }
 
-  showNewDialog() {
+  showFormDialog(oldData = null) {
+    this.selectedData = oldData;
     this.displayDialog = true;
   }
 
-  showDetailsDialog() {
+  showDetailsDialog(data) {
+    this.selectedData = data;
     this.displayDetailsDialog = true;
   }
 
   onDialogHide(event) {
     this.displayDialog = event;
+    this.selectedData = null;
   }
 
-  showDetails(row) {
-    console.log(row)
+  onDetailsDialogHide(event) {
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
 }

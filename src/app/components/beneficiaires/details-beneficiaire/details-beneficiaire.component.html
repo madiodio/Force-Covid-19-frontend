@@ -1,1 +1,39 @@
-<p>details-beneficiaire works!</p>
+<p-dialog [(visible)]="display" [style]="{width: '30vw'}" (onHide)="onDialogHide()">
+  <p-header>
+    Recap Bénéficiaire
+  </p-header>
+
+  <div class="p-grid">
+    <div class="p-col-12">
+      <p>Nom : <span class="txt-bold">{{beneficiaire?.lastname}} </span></p>
+    </div>
+    <div class="p-col-12">
+      <p>Salaire Mensuel : <span class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+    </div>
+    <div class="p-col-12">
+
+      <p>Nbre d'enfants : <span class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+
+    </div>
+    <div class="p-col-12">
+
+      <p>Nbre personnes agées : <span class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+
+    </div>
+    <div class="p-col-12">
+      <p>Contact : <span class="txt-bold" class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+
+
+    </div>
+    <div class="p-col-12">
+
+      <p>Adresse : <span class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+
+    </div>
+    <div class="p-col-12">
+
+      <p>Coordonnées : <span class="txt-bold">{{beneficiaire?.lastname}}</span></p>
+
+    </div>
+  </div>
+</p-dialog>
