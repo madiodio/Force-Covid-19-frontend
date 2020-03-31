@@ -4,6 +4,7 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 
+
 @Component({
   selector: 'app-list-beneficiaire',
   templateUrl: './list-beneficiaire.component.html',
@@ -16,8 +17,14 @@ export class ListBeneficiaireComponent implements OnInit {
   selectedItems: Beneficiaire[];
 
   loading: boolean = true;
-  
+
   query = new SearchCriteria();
+
+  displayDialog: boolean = false;
+  displayDetailsDialog: boolean = false;
+  selectedData;
+
+
 
   constructor(private beneficierService: BeneficiaireService) { }
 
@@ -37,7 +44,7 @@ export class ListBeneficiaireComponent implements OnInit {
     this.loadFakeData();
   }
 
-  removeItme(id){
+  removeItme(id) {
     console.log(id);
   }
 
@@ -53,5 +60,25 @@ export class ListBeneficiaireComponent implements OnInit {
       this.listItems.push(bene);
     }
 
+  }
+
+  showFormDialog(oldData = null) {
+    this.selectedData = oldData;
+    this.displayDialog = true;
+  }
+
+  showDetailsDialog(data) {
+    this.selectedData = data;
+    this.displayDetailsDialog = true;
+  }
+
+  onDialogHide(event) {
+    this.displayDialog = event;
+    this.selectedData = null;
+  }
+
+  onDetailsDialogHide(event) {
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
 }
