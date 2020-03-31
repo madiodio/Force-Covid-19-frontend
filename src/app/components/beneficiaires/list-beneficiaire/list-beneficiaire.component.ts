@@ -24,6 +24,10 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   totalRecordsSubscription: Subscription;
   loading: boolean = true;
 
+  displayDialog: any;
+  selectedData: any;
+  displayDetailsDialog: boolean;
+
   errorMsg: any;
   
   constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) { }
