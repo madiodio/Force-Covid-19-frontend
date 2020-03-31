@@ -3,7 +3,6 @@ import { Table } from 'primeng/table';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
-import { ModalService } from 'src/app/services/modal.service';
 
 
 @Component({
@@ -27,7 +26,7 @@ export class ListBeneficiaireComponent implements OnInit {
 
 
 
-  constructor(private beneficierService: BeneficiaireService, private modalService: ModalService) { }
+  constructor(private beneficierService: BeneficiaireService) { }
 
   ngOnInit(): void {
 
