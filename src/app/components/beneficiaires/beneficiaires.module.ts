@@ -6,6 +6,12 @@ import { DetailsBeneficiaireComponent } from './details-beneficiaire/details-ben
 import { BeneficiaireRoutingModule } from './beneficiaire-routing.module';
 import { ShareModule } from 'src/app/share/share/share.module';
 
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+
+
 
 
 @NgModule({
@@ -17,7 +23,11 @@ import { ShareModule } from 'src/app/share/share/share.module';
   imports: [
     CommonModule,
     ShareModule,
-    BeneficiaireRoutingModule
+    BeneficiaireRoutingModule,
+    DialogModule,
+    InputTextModule,
+    CheckboxModule,
+    ButtonModule
   ]
 })
 export class BeneficiairesModule { }

@@ -1,4 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, } from '@angular/platform-browser';
+import { BrowserAnimationsModule, } from '@angular/platform-browser/animations';
+
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData, DatePipe } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -31,7 +33,11 @@ import { BiensModule } from './components/biens/biens.module';
 import { DistributeursModule } from './components/distributeurs/distributeurs.module';
 import { StocksModule } from './components/stocks/stocks.module';
 import { UtilisateursModule } from './components/utilisateurs/utilisateurs.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { DialogModule } from 'primeng/dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +48,9 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MenubarModule,
     InputTextModule,
@@ -55,7 +63,8 @@ import { FormsModule } from '@angular/forms';
     DistributeursModule,
     StocksModule,
     UtilisateursModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DialogModule
   ],
   providers: [
     DatePipe,
