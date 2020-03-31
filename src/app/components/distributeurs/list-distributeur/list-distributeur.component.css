@@ -1,4 +1,60 @@
+@import "../../../../assets/styles/bootstrap.css";
+
+.btn {
+  height: 50px;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.actions,
+.block-table {
+  width: 100%;
+  margin-top: 50px;
+}
+
 .hero.distributeur {
   position: relative;
   background-image: url("/assets/images/hero-distributeur.png");
+}
+
+form label {
+  font-weight: bold;
+}
+
+.block-filter form select {
+  border: 2px solid #000;
+  width: 220px;
+  height: 50px;
+}
+
+.block-filter form .form-group {
+  margin-right: 20px;
+}
+
+.block-filter form .btn {
+  background-color: #ffc85b;
+  color: #fff;
+  width: 130px;
+}
+
+thead {
+  background-color: #d8d8d8;
+}
+
+th{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+th, td{
+  border-color: #979797 !important;
+}
+
+tbody {
+  opacity: 0.46;
+  /* border: solid 1px #979797; */
+  background-color: #d8d8d8;
 }

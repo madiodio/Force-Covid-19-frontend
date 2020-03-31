@@ -7,7 +7,91 @@
 <div class="spacer-xy"></div>
 
 <div class="p-grid">
-    <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
+  <div class="d-flex justify-content-between align-items-end actions">
+    <div class="block-filter">
+      <form class="d-flex align-items-end">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-warning">Filter</button>
+        </div>
+      </form>
+    </div>
+    <div class="add-produit">
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Ajouter un Distributeur</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-table">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nom & Prénom</th>
+          <th scope="col">N° CNI</th>
+          <th scope="col">Magazin</th>
+          <th scope="col">Zone Octroyée</th>
+          <th scope="col">Bénéficiaire Octroyé</th>
+          <th scope="col">Coordonnées GPS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">08A-654</th>
+          <td>Modou Ndiaye</td>
+          <td>1 755 1920 07896</td>
+          <td>Magazin 4, Thiès</td>
+          <td>Liberté 4,5,6 </td>
+          <td>Modou Ndiaye</td>
+          <td>49°26’34.4’’ N 1°06’07.3’’E</td>
+        </tr>
+        <tr>
+          <th scope="row">08A-654</th>
+          <td>Modou Ndiaye</td>
+          <td>1 755 1920 07896</td>
+          <td>Magazin 4, Thiès</td>
+          <td>Liberté 4,5,6 </td>
+          <td>Modou Ndiaye</td>
+          <td>49°26’34.4’’ N 1°06’07.3’’E</td>
+        </tr>
+        <tr>
+          <th scope="row">08A-654</th>
+          <td>Modou Ndiaye</td>
+          <td>1 755 1920 07896</td>
+          <td>Magazin 4, Thiès</td>
+          <td>Liberté 4,5,6 </td>
+          <td>Modou Ndiaye</td>
+          <td>49°26’34.4’’ N 1°06’07.3’’E</td>
+        </tr>
+        <tr>
+          <th scope="row">08A-654</th>
+          <td>Modou Ndiaye</td>
+          <td>1 755 1920 07896</td>
+          <td>Magazin 4, Thiès</td>
+          <td>Liberté 4,5,6 </td>
+          <td>Modou Ndiaye</td>
+          <td>49°26’34.4’’ N 1°06’07.3’’E</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
         <ng-template pTemplate="caption">
             <div style="text-align: right">        
                 <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -44,5 +128,5 @@
                   </td>
             </tr>
         </ng-template>
-    </p-table>
+    </p-table> -->
 </div>
