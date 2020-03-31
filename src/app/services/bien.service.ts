@@ -13,6 +13,7 @@ export class BienService {
   biens: Bien[];
   searchCriteria: any;
   biensSubject = new Subject<Bien[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.BIEN_URL;
@@ -20,6 +21,10 @@ export class BienService {
 
   emitBiens() {
     this.biensSubject.next(this.biens);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getBiens(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class BienService {
     }
     this.http.get<any>(url).subscribe(
       (biens: any) => {
-        this.biens=biens
+        this.biens=biens['hydra:member'];
+        this.emitTotalRecordsSubject(biens['hydra:totalItems'] as number);
         this.emitBiens();
       }, (error: any) => {
         console.log(error);

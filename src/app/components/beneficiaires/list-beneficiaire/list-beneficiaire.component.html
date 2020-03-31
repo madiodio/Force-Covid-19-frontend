@@ -1,10 +1,21 @@
+<app-form-beneficiaire [beneficiaire]="selectedData" [display]="displayDialog" (displayChange)="onDialogHide($event)">
+</app-form-beneficiaire>
+<app-details-beneficiaire [beneficiaire]="selectedData" [display]="displayDetailsDialog"
+  (displayChange)="onDetailsDialogHide($event)">
+</app-details-beneficiaire>
+
 <section class="page-section hero beneficiaire container">
-    <div class="hero-content">
-        <h1 class="color-tertiary">Les Ayants droit</h1>
-    </div>
+  <div class="hero-content">
+    <h1 class="color-tertiary">Les Ayants droit</h1>
+  </div>
 </section>
 
 <div class="spacer-xy"></div>
+  <div class="p-col-4 align-right">
+    <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
+      Ajouter un Bénéficiaire
+    </button>
+  </div>
 
 <div class="p-grid">
     <p-table #dt [columns]="cols" 
@@ -39,10 +50,10 @@
                 </td>
                 <td>
                     <div class="table_actions">
-                      <a class="dropdown-item show" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
+                      <a class="dropdown-item show" (click)="showDetailsDialog(rowData)" [routerLink]="" title="Details">
                         <i class="pi pi-eye"></i>
                       </a>
-                      <a class="dropdown-item edit" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
+                      <a class="dropdown-item edit" (click)="showFormDialog(rowData)" [routerLink]="" title="Modifier">
                         <i class="pi pi-pencil"></i>
                       </a>
                       <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">

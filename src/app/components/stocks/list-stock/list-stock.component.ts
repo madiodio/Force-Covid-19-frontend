@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
+import { Subscription, Subject } from 'rxjs';
+import { GlobalService } from 'src/app/global.service';
 
 @Component({
   selector: 'app-list-stock',
@@ -13,12 +15,19 @@ export class ListStockComponent implements OnInit {
   cols: any[];
 
   selectedItems: Stock[];
+  totalRecords: number=0;
+  searchCriteriaSubject=new Subject<SearchCriteria>();
+  searchCriteria: SearchCriteria= new SearchCriteria();
+  itemSubscription: Subscription;
+  searchCriteriaSubscription: Subscription;
+  totalRecordsSubscription: Subscription;
 
   loading: boolean = true;
 
-  query = new SearchCriteria();
-
-  constructor(private stockService: StockService) { }
+  errorMsg: any;
+  constructor(
+    private stockService: StockService,
+    private global: GlobalService) { }
 
   ngOnInit(): void {
 
@@ -29,27 +38,61 @@ export class ListStockComponent implements OnInit {
       { field: 'updated', header: 'Date mise à jour' },
       { field: 'userId', header: 'Utilisateur' }
     ];
-    this.stockService.getStocks(this.query);
-    this.listItems = this.stockService.stocks;
-    this.loadFakeData();
+
+    this.itemSubscription=this.stockService.stocksSubject.subscribe(
+      (results: Stock[])=>{
+        this.listItems=results;
+        this.loading=false;
+      }
+    );
+    this.totalRecordsSubscription=this.stockService.totalRecordsSubject.subscribe(
+      (totalRecords: number)=>{
+        this.totalRecords=totalRecords;
+      }
+    );
+    //pipe(debounceTime(500),distinctUntilChanged()).
+    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria)=>{
+        console.log(this.searchCriteria)
+        this.stockService.getStocks(searchCriteria);
+      }
+    );
+    this.stockService.getStocks(this.searchCriteria);
+  
   }
 
-  removeItme(id){
-    console.log(id);
-  }
 
-  loadFakeData() {
-    this.listItems = [];
-    for (let i = 1; i <= 20; i++) {
-      let item = new Stock();
-      item.id = i;
-      item.welfare = 'Nom ' + i;
-      item.quantity = i;
-      item.created = 'created' + i;
-      item.updated = 'updated ' + i;
-      item.userId = i;
-      this.listItems.push(item);
+  ngOnDestroy(){
+    if(this.itemSubscription){
+      this.itemSubscription.unsubscribe();
     }
-
+    if(this.searchCriteriaSubscription){
+      this.searchCriteriaSubscription.unsubscribe();
+    }
+    if(this.totalRecordsSubscription){
+      this.totalRecordsSubscription.unsubscribe();
+    }
   }
+
+  //Call this method in form filter template
+  onSetSearchCriteria(){
+    this.searchCriteriaSubject.next(this.searchCriteria);
+  }
+
+  loadItemLazy(event: any){
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  }
+
+  removeItme(id: number){
+    this.stockService.deleteStock(id).then(
+      (response: any)=>{
+        //continued!!!
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+  
 }
