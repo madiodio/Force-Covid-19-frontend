@@ -28,7 +28,8 @@ export class CachingInterceptorService implements HttpInterceptor {
     cache: RequestCacheService): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        /* 'Accept': 'application/json' */
       }
     });
 

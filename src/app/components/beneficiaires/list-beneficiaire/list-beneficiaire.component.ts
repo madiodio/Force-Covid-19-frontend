@@ -24,13 +24,13 @@ export class ListBeneficiaireComponent implements OnInit {
   ngOnInit(): void {
 
     this.cols = [
-      { field: 'lastname', header: 'Nom' },
-      { field: 'firstname', header: 'Prenom' },
-      { field: 'pieceDIdentite', header: 'Piece d\'identite' },
-      { field: 'phoneNumber', header: 'Téléphone' },
-      { field: 'phoneNumber', header: 'Commune' },
-      { field: 'phoneNumber', header: 'Ville' },
-      { field: 'phoneNumber', header: 'Région' }
+      { field: 'lastName', header: 'Nom' },
+      { field: 'firstName', header: 'Prenom' },
+      { field: 'mobileNumber', header: 'Piece d\'identite' },
+      { field: 'mobileNumber', header: 'Téléphone' },
+      { field: 'mobileNumber', header: 'Commune' },
+      { field: 'mobileNumber', header: 'Ville' },
+      { field: 'mobileNumber', header: 'Région' }
     ];
     this.beneficierService.getBeneficiaires(this.query);
     this.listItems = this.beneficierService.beneficiaires;
@@ -45,11 +45,11 @@ export class ListBeneficiaireComponent implements OnInit {
     this.listItems = [];
     for (let i = 1; i <= 20; i++) {
       let bene = new Beneficiaire();
-      bene.id = '' + i;
-      bene.lastname = 'Nom ' + i;
-      bene.firstname = 'Prenom ' + i;
-      bene.pieceDIdentite = 'piece D Identite' + i;
-      bene.phoneNumber = 'telephone ' + i;
+      bene.id =  i;
+      bene.firstName = 'Nom ' + i;
+      bene.lastName = 'Prenom ' + i;
+      bene.mobileNumber = 'piece D Identite' + i;
+      bene.mobileNumber = 'telephone ' + i;
       this.listItems.push(bene);
     }
 

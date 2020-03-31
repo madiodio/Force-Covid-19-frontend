@@ -13,6 +13,7 @@ export class StockService {
   stocks: Stock[];
   searchCriteria: any;
   stocksSubject = new Subject<Stock[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.STOCK_URL;
@@ -20,6 +21,10 @@ export class StockService {
 
   emitStocks() {
     this.stocksSubject.next(this.stocks);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getStocks(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class StockService {
     }
     this.http.get<any>(url).subscribe(
       (stocks: any) => {
-        this.stocks=stocks
+        this.stocks=stocks['hydra:member'];
+        this.emitTotalRecordsSubject(stocks['hydra:totalItems'] as number);
         this.emitStocks();
       }, (error: any) => {
         console.log(error);
@@ -83,6 +89,26 @@ export class StockService {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + stock.id, JSON.stringify(stock)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getStocks(this.searchCriteria);
+            }else{
+              this.getStocks();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchStock(stock: Stock) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + stock.id, JSON.stringify(stock)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

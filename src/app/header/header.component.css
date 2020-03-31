@@ -1,26 +1,15 @@
-* {
-    font-family: HelveticaNeueLTStd-Bd;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-}
-
 /* Header */
 .header {
-    padding: 16px 50px 0 50px;
-    height: 90px;
-    vertical-align: middle;
+  padding: 16px 50px 0 50px;
+  height: 90px;
+  vertical-align: middle;
 }
 
 .header > div:first-child {
-
 }
 
 .header .logo {
-  width: 81px;
-  height: 79px;
+  height: 85%;
   display: inline-block;
 }
 .header .title {
@@ -34,98 +23,97 @@
 }
 
 .header div:first-child {
-    text-align: left;
+  text-align: left;
 }
 
 .user {
-    text-align: center;
-    height: 100%;
-    margin-top: 25px;
-    text-align: left;
-    padding: 0 !important;
-    vertical-align: middle;
+  text-align: center;
+  height: 100%;
+  margin-top: 25px;
+  text-align: left;
+  padding: 0 !important;
+  vertical-align: middle;
 }
 
 .user .avatar {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .user div.userinfos {
-    display: inline-block;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12px;
-    font-weight: bold;
-    width: 50%;
-    /* margin: 5px 0 0 5px; */
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: bold;
+  width: 50%;
+  /* margin: 5px 0 0 5px; */
 }
 
 .user .name {
-    color: #000000;
-    display: inline-block;
-    width: 100%;
-    font-family: HelveticaNeueLTStd-Bd;
+  color: #000000;
+  display: inline-block;
+  width: 100%;
 }
 
 .user .role {
-    color: #379956; 
-    display: inline-block;
-    width: 100%;
+  color: #379956;
+  display: inline-block;
+  width: 100%;
 }
 
 .user .notif {
-    display: inline-block;
-    width: 20%;
-    vertical-align: top;
-    margin: 15px 0 0 3px;
+  display: inline-block;
+  width: 20%;
+  vertical-align: top;
+  margin: 15px 0 0 3px;
 }
 .user .notif_badge {
-    background: red;
-    border-radius: 50%;
-    color: white;
-    font-weight: bold;
-    padding: 0 3px;
-    font-size: 10px;
+  background: red;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  padding: 0 3px;
+  font-size: 10px;
 }
 
 /* Custom Menu Item */
 ::ng-deep .ui-menubar {
-    text-align: right;
-    /* margin-top: 15px; */
+  text-align: right;
+  /* margin-top: 15px; */
 }
 
 ::ng-deep .ui-menuitem {
-    text-align: center;
-    min-width: 100px;
+  text-align: center;
+  min-width: 100px;
 }
 
 ::ng-deep .ui-menubar {
-    border: none !important;
+  border: none !important;
 }
 
 ::ng-deep .customItem {
-
 }
 
 ::ng-deep .customItem:hover {
-    background: none !important;
+  background: none !important;
 }
 
 ::ng-deep .customItem .ui-menuitem-icon {
-    font-size: 30px;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    color: #000000;
-    padding: none !important;
-    margin: none !important;
+  font-size: 30px;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  color: #000000;
+  padding: none !important;
+  margin: none !important;
 }
 
 ::ng-deep .customItem .ui-menuitem-text {
-    display: block;
+  display: block;
 }
 
-::ng-deep .customItem:hover .ui-menuitem-text, ::ng-deep .customItem:hover .ui-menuitem-icon{
-    color: #379956 !important;
+::ng-deep .customItem:hover .ui-menuitem-text,
+::ng-deep .customItem:hover .ui-menuitem-icon {
+  color: #379956 !important;
 }

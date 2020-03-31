@@ -13,6 +13,7 @@ export class BienService {
   biens: Bien[];
   searchCriteria: any;
   biensSubject = new Subject<Bien[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.BIEN_URL;
@@ -20,6 +21,10 @@ export class BienService {
 
   emitBiens() {
     this.biensSubject.next(this.biens);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getBiens(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class BienService {
     }
     this.http.get<any>(url).subscribe(
       (biens: any) => {
-        this.biens=biens
+        this.biens=biens['hydra:member'];
+        this.emitTotalRecordsSubject(biens['hydra:totalItems'] as number);
         this.emitBiens();
       }, (error: any) => {
         console.log(error);
@@ -83,6 +89,26 @@ export class BienService {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + bien.id, JSON.stringify(bien)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getBiens(this.searchCriteria);
+            }else{
+              this.getBiens();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchBien(bien: Bien) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + bien.id, JSON.stringify(bien)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

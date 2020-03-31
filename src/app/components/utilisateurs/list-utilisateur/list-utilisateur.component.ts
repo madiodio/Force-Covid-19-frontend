@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
-import { UtilisateurModel } from 'src/app/models/utilisateurs.model';
 
 @Component({
   selector: 'app-list-utilisateur',
@@ -10,10 +9,10 @@ import { UtilisateurModel } from 'src/app/models/utilisateurs.model';
   styleUrls: ['./list-utilisateur.component.css']
 })
 export class ListUtilisateurComponent implements OnInit {
-  listItems: UtilisateurModel[];
+  listItems: User[];
   cols: any[];
 
-  selectedItems: UtilisateurModel[];
+  selectedItems: User[];
 
   loading: boolean = true;
   
@@ -41,12 +40,12 @@ export class ListUtilisateurComponent implements OnInit {
   loadFakeData() {
     this.listItems = [];
     for (let i = 1; i <= 20; i++) {
-      let itme = new UtilisateurModel();
-      itme.id = '' + i;
-      itme.lastname = 'Nom ' + i;
-      itme.firstname = 'Prenom ' + i;
-      itme.role = 'Role' + i;
-      itme.email = 'Email ' + i;
+      let itme = new User();
+      itme.id = i;
+      itme.lastName = 'Nom ' + i;
+      itme.firstName = 'Prenom ' + i;
+      itme.type = 'Role' + i;
+      itme.username = 'Email ' + i;
       this.listItems.push(itme);
     }
 

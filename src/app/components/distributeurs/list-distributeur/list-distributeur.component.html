@@ -7,11 +7,21 @@
 <div class="spacer-xy"></div>
 
 <div class="p-grid">
-    <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
+    <p-table #dt [columns]="cols" 
+                  [value]="listItems" 
+                  selectionMode="multiple" 
+                  [lazy]="true" 
+                  [(selection)]="selectedItems" 
+                  [loading]="loading" 
+                  [totalRecords]="totalRecords" 
+                  [paginator]="true" 
+                  [rows]="searchCriteria.size"
+                  (onLazyLoad)="loadItemLazy($event)">
         <ng-template pTemplate="caption">
             <div style="text-align: right">        
                 <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="recherche" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <!-- <input type="text" pInputText size="50" placeholder="recherche" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto"> -->
+                <input type="text" pInputText size="50" placeholder="recherche" [(ngModel)]="searchCriteria.searchKey" (input)="onSetSearchCriteria()" style="width:auto">
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>

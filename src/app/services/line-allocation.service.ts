@@ -13,6 +13,7 @@ export class LineAllocationService {
   lineAllocations: LineAllocationModel[];
   searchCriteria: any;
   lienAllocationsSubject = new Subject<LineAllocationModel[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.LINE_ALLOCATION_URL;
@@ -20,6 +21,10 @@ export class LineAllocationService {
 
   emitLineAllocations() {
     this.lienAllocationsSubject.next(this.lineAllocations);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getLineAllocations(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class LineAllocationService {
     }
     this.http.get<any>(url).subscribe(
       (lineAllocations: any) => {
-        this.lineAllocations=lineAllocations
+        this.lineAllocations=lineAllocations['hydra:member'];
+        this.emitTotalRecordsSubject(lineAllocations['hydra:totalItems'] as number);
         this.emitLineAllocations();
       }, (error: any) => {
         console.log(error);
@@ -83,6 +89,26 @@ export class LineAllocationService {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getLineAllocations(this.searchCriteria);
+            }else{
+              this.getLineAllocations();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchLineAllocation(lineAllocation: LineAllocationModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + lineAllocation.id, JSON.stringify(lineAllocation)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

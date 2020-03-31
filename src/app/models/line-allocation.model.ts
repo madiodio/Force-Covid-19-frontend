@@ -1,7 +1,8 @@
 export class LineAllocationModel{
-    id: string;
+    id: number;
     welfare: string
     quantity: string;
+    allocation: string;
 
     constructor(){}
 

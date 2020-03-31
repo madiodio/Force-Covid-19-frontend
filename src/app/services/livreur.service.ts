@@ -13,6 +13,7 @@ export class LivreurService {
   livreurs: Livreur[];
   searchCriteria: any;
   livreursSubject = new Subject<Livreur[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.LIVREUR_URL;
@@ -20,6 +21,10 @@ export class LivreurService {
 
   emitLivreurs() {
     this.livreursSubject.next(this.livreurs);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getLivreurs(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class LivreurService {
     }
     this.http.get<any>(url).subscribe(
       (livreurs: any) => {
-        this.livreurs=livreurs
+        this.livreurs=livreurs['hydra:member'];
+        this.emitTotalRecordsSubject(livreurs['hydra:totalItems'] as number);
         this.emitLivreurs();
       }, (error: any) => {
         console.log(error);
@@ -83,6 +89,26 @@ export class LivreurService {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + livreur.id, JSON.stringify(livreur)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getLivreurs(this.searchCriteria);
+            }else{
+              this.getLivreurs();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchLivreur(livreur: Livreur) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + livreur.id, JSON.stringify(livreur)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){

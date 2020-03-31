@@ -13,6 +13,7 @@ export class RegionService {
   regions: RegionModel[];
   searchCriteria: any;
   regionsSubject = new Subject<RegionModel[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.REGION_URL;
@@ -20,6 +21,10 @@ export class RegionService {
 
   emitRegions() {
     this.regionsSubject.next(this.regions);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getRegions(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class RegionService {
     }
     this.http.get<any>(url).subscribe(
       (regions: any) => {
-        this.regions=regions
+        this.regions=regions['hydra:member'];
+        this.emitTotalRecordsSubject(regions['hydra:totalItems'] as number);
         this.emitRegions();
       }, (error: any) => {
         console.log(error);
@@ -83,6 +89,26 @@ export class RegionService {
     return new Promise(
       (resolve, reject) => {
         this.http.put<any>(this.baseUrl + region.id, JSON.stringify(region)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getRegions(this.searchCriteria);
+            }else{
+              this.getRegions();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
+  async patchRegion(region: RegionModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + region.id, JSON.stringify(region)).subscribe(
           (response: any) => {
             resolve(response);
             if(this.searchCriteria){
