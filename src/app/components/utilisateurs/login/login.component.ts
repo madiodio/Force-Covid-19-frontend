@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from 'src/app/models/user';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { GlobalService } from 'src/app/global.service';
+import * as jwt_decode from "jwt-decode";
 
 declare const $: any;
 @Component({
@@ -25,14 +26,15 @@ export class LoginComponent implements OnInit {
     private router: Router, private glService: GlobalService) { }
 
   ngOnInit() {
-    this.returnUrl = this.activeroute.snapshot.queryParams['returnUrl'] || '/administration';
+    this.returnUrl = this.activeroute.snapshot.queryParams['returnUrl'] || '';
     this.user = this.authService.getCurrentUser();
     if (this.user) {
-      if (this.authService.currentUserIsAdmin()) {
+      /* if (this.authService.currentUserIsAdmin()) {
         this.router.navigate(['/administration']);
       } else {
         this.router.navigate(['/user']);
-      }
+      } */
+      this.router.navigate(['']);
     } else {
       this.user = new User();
     }
@@ -48,22 +50,33 @@ export class LoginComponent implements OnInit {
 
     const user = this.user;
 
-    this.userService.login(user.email, user.password).subscribe(response => {
+    this.userService.login(user.username, user.password).subscribe(response => {
       // now we need save user token to the cookie. or now i just simply save to Local storage.
-      const getteduser = response.user as User;
-      getteduser.type = getteduser.roles[0] ? getteduser.roles[0].role : 'user';
+      let getteduser: User;
+      if(response && response.token){
+        getteduser =jwt_decode(response.token);
+        getteduser.type=getteduser.username;
+        this.authService.setUser(getteduser);
+
+        const token = response.token;
+        this.authService.setToken(token);
+        this.loading=false;
+        this.router.navigate([this.returnUrl]);
+      }else{
+        this.router.navigate(['']);
+      }
+      /* getteduser.type = getteduser.roles[0] ? getteduser.roles[0].role : 'user'; */
+      /* getteduser.type=getteduser.username;
       this.authService.setUser(getteduser);
 
       const token = response.id;
-
       this.authService.setToken(token);
       if (getteduser.type && getteduser.type === this.glService.ADMINISTRATOR) {
-        // now we need redirect to profile user if they logged in.
         this.router.navigate([this.returnUrl]);
       } else {
-        // now we need redirect to profile user if they logged in.
         this.router.navigate(['/user']);
-      }
+      } */
+      
 
     }, err => {
       this.loading = false;

@@ -42,12 +42,12 @@ export class ListStockComponent implements OnInit {
     this.listItems = [];
     for (let i = 1; i <= 20; i++) {
       let item = new Stock();
-      item.id = '' + i;
+      item.id = i;
       item.welfare = 'Nom ' + i;
-      item.quantity = '' + i;
+      item.quantity = i;
       item.created = 'created' + i;
       item.updated = 'updated ' + i;
-      item.userId = 'User ' + i;
+      item.userId = i;
       this.listItems.push(item);
     }
 

@@ -1,6 +1,7 @@
 export class CategoryModel{
-    id: string;
+    id: number;
     name: string;
-
+    welfares: string[];
+    
     constructor(){}
 }

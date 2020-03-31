@@ -39,10 +39,10 @@
               <!--form #f="ngForm" (ngSubmit)="onLogin()"-->
               <form *ngIf="user"  name="form" (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-                  <label for="login-form-email">E-mail</label>
-                  <input [(ngModel)]="user.email" type="text" class="form-control" name="email" id="email"
+                  <label for="login-form-email">Identifiant</label>
+                  <input [(ngModel)]="user.username" type="text" class="form-control" name="email" id="email"
                     #email="ngModel" required placeholder="E-mail">
-                  <div *ngIf="f.submitted && !email.valid" class="help-block">Entrez une adresse e-mail </div>
+                  <div *ngIf="f.submitted && !email.valid" class="help-block">Entrez une identifiant </div>
                 </div>
 
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">

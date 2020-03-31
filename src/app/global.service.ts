@@ -12,21 +12,21 @@ export class GlobalService {
   ADMINISTRATOR = 'administrator';
   ROOT = 'ROOT';
   USERS_URL = this.BASE_API_URL + '/users';
-  USER_REGISTER_URL = this.BASE_API_URL + '/auth/register';
-  USER_LOGIN_URL = this.BASE_API_URL + '/auth/login';
+  /* USER_REGISTER_URL = this.BASE_API_URL + '/auth/register'; */
+  USER_LOGIN_URL = (this.BASE_API_URL.substring(0,this.BASE_API_URL.length - 4) )+ '/authentication_token';
   USER_LOGOUT_URL = this.BASE_API_URL + '/users/logout';
   ALLOCATION_URL=this.BASE_API_URL+'/allocations';
-  BENEFICIAIRE_URL=this.BASE_API_URL+'/beneficiaires';
-  BIEN_URL=this.BASE_API_URL+'/biens';
-  CATEGORY_URL=this.BASE_API_URL+'/biens';
-  DEPARTEMENT_URL=this.BASE_API_URL+'/departements';
-  DISTRIBUTEUR_URL=this.BASE_API_URL+'/distributeurs';
-  LINE_ALLOCATION_URL=this.BASE_API_URL+'/line-allocations';
-  LIVREUR_URL=this.BASE_API_URL+'/livreurs';
+  BENEFICIAIRE_URL=this.BASE_API_URL+'/beneficiaries';
+  BIEN_URL=this.BASE_API_URL+'/welfares';
+  CATEGORY_URL=this.BASE_API_URL+'/categories';
+  DEPARTEMENT_URL=this.BASE_API_URL+'/departments';
+  DISTRIBUTEUR_URL=this.BASE_API_URL+'/distributors';
+  LINE_ALLOCATION_URL=this.BASE_API_URL+'/line_allocations';
+  LIVREUR_URL=this.BASE_API_URL+'/delivery_men';
   REGION_URL=this.BASE_API_URL+'/regions';
   STOCK_URL=this.BASE_API_URL+'/stocks';
   SUBDIVISION_URL=this.BASE_API_URL+'/subdivisions';
-  UTILISATEUR_URL=this.BASE_API_URL+'/utilisateurs';
+  UTILISATEUR_URL=this.BASE_API_URL+'/users';
 
 
   UPLOAD_FILE = '/upload/images';
@@ -51,6 +51,24 @@ export class GlobalService {
     }
     return url;
   } 
+
+
+  public prepareSearchCriteria(event: any, searchCriteria: SearchCriteria): SearchCriteria{
+    if(event){
+      if(event.sortField){
+        searchCriteria.orderBy=event.sortField;
+      }
+      if(event.sortOrder){
+        searchCriteria.orderDirection=event.sortOrder;
+      }
+      if(event.first){
+      }
+      if(event.rows){
+  
+      }
+    }
+    return searchCriteria;
+  }
 
   
 }

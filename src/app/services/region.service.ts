@@ -99,6 +99,26 @@ export class RegionService {
     );
   }
 
+  async patchRegion(region: RegionModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + region.id, JSON.stringify(region)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getRegions(this.searchCriteria);
+            }else{
+              this.getRegions();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteRegion(id: number) {
     return new Promise(
       (resolve, reject) => {

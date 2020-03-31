@@ -1,13 +1,8 @@
+import { LoginComponent } from './components/utilisateurs/login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ListBeneficiaireComponent } from './components/beneficiaires/list-beneficiaire/list-beneficiaire.component';
-import { DetailsBeneficiaireComponent } from './components/beneficiaires/details-beneficiaire/details-beneficiaire.component';
-import { FormBeneficiaireComponent } from './components/beneficiaires/form-beneficiaire/form-beneficiaire.component';
-import { AuthGuardService } from './services/auth-guard.service';
-import { ListStockComponent } from './components/stocks/list-stock/list-stock.component';
-import { DetailsStockComponent } from './components/stocks/details-stock/details-stock.component';
-import { FromStockComponent } from './components/stocks/from-stock/from-stock.component';
 
 
 const routes: Routes = [
@@ -15,17 +10,24 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 	{
 		path: 'stocks',
-    loadChildren: './components/stocks/stocks.module#StocksModule'
+    loadChildren: './components/stocks/stocks.module#StocksModule',
+    canLoad: [AuthGuardService]
   },
 	{
 		path: 'beneficiaires',
-    loadChildren: './components/beneficiaires/beneficiaires.module#BeneficiairesModule'
+    loadChildren: './components/beneficiaires/beneficiaires.module#BeneficiairesModule',
+    canLoad: [AuthGuardService]
   },
 	{
 		path: 'distributeurs',
-    loadChildren: './components/distributeurs/distributeurs.module#DistributeursModule'
+    loadChildren: './components/distributeurs/distributeurs.module#DistributeursModule',
+    canLoad: [AuthGuardService]
   },
   {
     path: 'utilisateurs',
@@ -33,15 +35,18 @@ const routes: Routes = [
   },
   {
     path: 'allocations',
-    loadChildren: './components/allocations/allocations.module#AllocationsModule'
+    loadChildren: './components/allocations/allocations.module#AllocationsModule',
+    canLoad: [AuthGuardService]
   },
   {
     path: 'livreurs',
-    loadChildren: './components/livreurs/livreurs.module#LivreursModule'
+    loadChildren: './components/livreurs/livreurs.module#LivreursModule',
+    canLoad: [AuthGuardService]
   },
   {
     path: 'biens',
-    loadChildren: './components/biens/biens.module#BiensModule'
+    loadChildren: './components/biens/biens.module#BiensModule',
+    canLoad: [AuthGuardService]
   }
     //]//,
 	//	canActivate: [AuthGuardService]

@@ -1,11 +1,10 @@
 export class Distributeur {
-    id: string;
-    manager: string;
-    storage: string;
-    coverage: string
+    id: number;
+    storageCapacity: string;
+    geographicalArea: string;
     address: string;
-    longitude: string;
-    latitude: string;
+    latitude: number;
+    longitude: number;
 
     constructor(){}
 }

@@ -99,6 +99,26 @@ export class CategoryService {
     );
   }
 
+  async patchCategory(category: CategoryModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + category.id, JSON.stringify(category)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getCategories(this.searchCriteria);
+            }else{
+              this.getCategories();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteCategory(id: number) {
     return new Promise(
       (resolve, reject) => {

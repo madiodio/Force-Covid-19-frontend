@@ -99,6 +99,26 @@ export class DepartementService {
     );
   }
 
+  async patchDepartement(departement: DepartementModel) {
+    return new Promise(
+      (resolve, reject) => {
+        this.http.patch<any>(this.baseUrl + departement.id, JSON.stringify(departement)).subscribe(
+          (response: any) => {
+            resolve(response);
+            if(this.searchCriteria){
+              this.getDepartements(this.searchCriteria);
+            }else{
+              this.getDepartements();
+            }
+          }, (error: any) => {
+            reject(error);
+          }
+        )
+      }
+
+    );
+  }
+
   async deleteDepartement(id: number) {
     return new Promise(
       (resolve, reject) => {

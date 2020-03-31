@@ -1,8 +1,8 @@
 export class Stock {
-    id: string;
-    userId: string;
+    id: number;
+    userId: number;
     welfare: string;
-    quantity: string;
+    quantity: number;
     created: string;
     updated: string;
 

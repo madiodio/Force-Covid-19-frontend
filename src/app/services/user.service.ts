@@ -31,7 +31,7 @@ export class UserService {
 
   register(user: User): Observable<any> {
     this.headers.delete('Authorization');
-    return this.http.post(this.glService.USER_REGISTER_URL, user, { headers: this.headers });
+    return this.http.post(this.glService.USERS_URL, user, { headers: this.headers });
   }
 
   updateUser(user: User): Observable<any> {
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(this.glService.USER_LOGIN_URL, { email: email, password: password });
+    return this.http.post<any>(this.glService.USER_LOGIN_URL, { username: email, password: password });
    /*
     return this.http.post<any>(this.glService.USER_LOGIN_URL, { email: email, password: password }, { headers: this.headers }).pipe(
       map(response => response.json())

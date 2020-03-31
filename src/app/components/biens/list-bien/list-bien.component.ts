@@ -42,12 +42,12 @@ export class ListBienComponent implements OnInit {
     this.listItems = [];
     for (let i = 1; i <= 20; i++) {
       let item = new Bien();
-      item.id = '' + i;
+      item.id = i;
       item.name = 'Nom ' + i;
       item.description = 'description ' + i;
       item.category = 'category' + i;
-      item.unit = 'unit ' + i;
-      item.weight = 'poids ' + i;
+      item.unit = i;
+      item.weight =i;
       this.listItems.push(item);
     }
 

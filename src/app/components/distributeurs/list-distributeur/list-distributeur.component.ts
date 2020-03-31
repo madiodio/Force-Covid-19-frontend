@@ -1,3 +1,4 @@
+import { GlobalService } from 'src/app/global.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { Distributeur } from 'src/app/models/distributeur';
@@ -10,50 +11,85 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './list-distributeur.component.html',
   styleUrls: ['./list-distributeur.component.css']
 })
-export class ListDistributeurComponent implements OnInit {
+export class ListDistributeurComponent implements OnInit, OnDestroy {
   
   listItems: Distributeur[];
   cols: any[];
-
   selectedItems: Distributeur[];
+  searchCriteria: SearchCriteria= new SearchCriteria();
+  totalRecords: number=0;
+  searchCriteriaSubject=new Subject<SearchCriteria>();
+  distributeurSubscription: Subscription;
+  searchCriteriaSubscription: Subscription;
+  totalRecordsSubscription: Subscription;
 
   loading: boolean = true;
 
-  query = new SearchCriteria();
+  errorMsg: any;
 
-  constructor(private distributeurService: DistributeurService) { }
+  constructor(private distributeurService: DistributeurService, private global: GlobalService) { }
 
-  ngOnInit(): void {
-
+  ngOnInit(): void {  
     this.cols = [
-      { field: 'manager', header: 'Nom' },
       { field: 'address', header: 'Adresse' },
-      { field: 'coverage', header: 'Zone geographique' },
-      { field: 'storage', header: 'Stock' },
-      { field: 'address', header: 'Commune' },
-      { field: 'address', header: 'Ville' },
-      { field: 'address', header: 'Région' }
+      { field: 'geographicalArea', header: 'Zone geographique' },
+      { field: 'storageCapacity', header: 'Capacité de stockage' },
+      { field: 'latitude', header: 'Latitude' },
+      { field: 'longitude', header: 'Longitude' }
     ];
-    this.distributeurService.getDistributeurs(this.query);
-    this.listItems = this.distributeurService.distributeurs;
-    this.loadFakeData();
+
+    this.distributeurSubscription=this.distributeurService.distributeursSubject.subscribe(
+      (distributeurs: Distributeur[])=>{
+        this.listItems=distributeurs;
+        this.loading=false;
+      }
+    );
+    this.totalRecordsSubscription=this.distributeurService.totalRecordsSubject.subscribe(
+      (totalRecords: number)=>{
+        this.totalRecords=totalRecords;
+      }
+    );
+    //pipe(debounceTime(500),distinctUntilChanged()).
+    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria)=>{
+        console.log(this.searchCriteria)
+        this.distributeurService.getDistributeurs(searchCriteria);
+      }
+    );
+    this.distributeurService.getDistributeurs(this.searchCriteria);
   }
 
-  removeItme(id){
-    console.log(id);
-  }
-
-  loadFakeData() {
-    this.listItems = [];
-    for (let i = 1; i <= 20; i++) {
-      let bene = new Distributeur();
-      bene.id = '' + i;
-      bene.manager = 'Nom ' + i;
-      bene.address = 'Adresse ' + i;
-      bene.coverage = 'Zone geographique' + i;
-      bene.storage = 'stock ' + i;
-      this.listItems.push(bene);
+  ngOnDestroy(){
+    if(this.distributeurSubscription){
+      this.distributeurSubscription.unsubscribe();
     }
-
+    if(this.searchCriteriaSubscription){
+      this.searchCriteriaSubscription.unsubscribe();
+    }
+    if(this.totalRecordsSubscription){
+      this.totalRecordsSubscription.unsubscribe();
+    }
   }
+
+  //Call this method in form filter template
+  onSetSearchCriteria(){
+    this.searchCriteriaSubject.next(this.searchCriteria);
+  }
+
+  loadItemLazy(event: any){
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  }
+
+  removeItme(id: number){
+    this.distributeurService.deleteDistributeur(id).then(
+      (response: any)=>{
+        //continued!!!
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
 }

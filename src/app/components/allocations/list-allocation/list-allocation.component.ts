@@ -45,12 +45,12 @@ export class ListAllocationComponent implements OnInit {
     this.listItems = [];
     for (let i = 1; i <= 20; i++) {
       let item = new Allocation();
-      item.id = '' + i;
-      item.welfare = 'Bien ' + i;
+      item.id =  i;
+      item.beneficiary = ''+ i;
       item.beneficiary = 'Bénéficiaire ' + i;
       item.confirmationCode = 'code-' + i;
       item.deliverer = 'livreur ' + i;
-      item.status = 'status ' + i;
+      item.status =  i;
       item.updated = 'updated ' + i;
       this.listItems.push(item);
     }
