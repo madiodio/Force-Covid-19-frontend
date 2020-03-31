@@ -1,69 +1,32 @@
-<div class="page-wrapper">
-  <div class="main-wrapper">
-    <div class="header-wrapper">
-      <div class="header">
-        <div class="container">
-          <div class="header-inner">
-            <div class="navigation-toggle toggle">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="header-logo">
-              <a routerLink="/">
-                <img src="assets/img/logo.png" class="svg" alt="Home">
-              </a>
-              <a routerLink="/" class="header-title">Force Covid-19</a>
-            </div>
-            <div class="header-nav">
-            </div>
+<div class="p-grid p-justify-center">
+  <div class="p-col-4">
+    <h3 class="page-title-small">Login</h3>
+    <h1>{{message}}</h1>
+    <form *ngIf="user" name="form" (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
+      <div class="ui-g ui-fluid">
+        <div class="p-col p-col-align-center">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+            <input [(ngModel)]="user.username" name="email" id="email" type="text" pInputText placeholder="Login">
           </div>
         </div>
       </div>
-    </div>
-    <div class="main">
-      <div class="main-inner">
-        <div class="page-title">
-          <div class="container">
-            <h1>Login</h1>
-            <!-- /.page-title-actions -->
+      <div class="ui-g ui-fluid">
+        <div class="p-col p-col-align-center">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-key" style="line-height: 1.25;"></i></span>
+            <input [(ngModel)]="user.password" name="password" id="password" type="password" pInputText
+              placeholder="mot de passe">
           </div>
-          <!-- /.container-->
-        </div>
-        <div class="content">
-          <div class="row mb80">
-            <div class="col-sm-4 offset-sm-4">
-              <button [routerLink]="['/']" class="btn btn-primary pull-right">Retour au site</button>
-              <h3 class="page-title-small">Login</h3>
-              <h1>{{message}}</h1>
-              <!--form #f="ngForm" (ngSubmit)="onLogin()"-->
-              <form *ngIf="user"  name="form" (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
-                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-                  <label for="login-form-email">Identifiant</label>
-                  <input [(ngModel)]="user.username" type="text" class="form-control" name="email" id="email"
-                    #email="ngModel" required placeholder="E-mail">
-                  <div *ngIf="f.submitted && !email.valid" class="help-block">Entrez une identifiant </div>
-                </div>
-
-                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                  <label for="login-form-password">Password</label>
-                  <input [(ngModel)]="user.password" type="password" class="form-control" name="password" id="password"
-                    #password="ngModel" required placeholder="mot de password">
-                  <div *ngIf="f.submitted && !password.valid" class="help-block">Entrez votre mot de passe</div>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary pull-right">Connexion</button>
-                  <img *ngIf="loading"
-                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                  <button [routerLink]="['/user/inscription']" class="btn btn-info pull-left">Inscription</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- /.row -->
-
         </div>
       </div>
-    </div>
+      <div class="ui-g ui-fluid">
+        <div class="p-col p-col-align-center">
+          <div class="ui-inputgroup">
+            <button pButton type="submit" label="Connexion" class="ui-button-rounded"></button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
