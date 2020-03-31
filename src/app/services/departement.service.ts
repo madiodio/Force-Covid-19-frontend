@@ -13,6 +13,7 @@ export class DepartementService {
   departements: DepartementModel[];
   searchCriteria: any;
   departementsSubject = new Subject<DepartementModel[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.DEPARTEMENT_URL;
@@ -20,6 +21,10 @@ export class DepartementService {
 
   emitDepartements() {
     this.departementsSubject.next(this.departements);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getDepartements(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class DepartementService {
     }
     this.http.get<any>(url).subscribe(
       (departements: any) => {
-        this.departements=departements
+        this.departements=departements['hydra:member'];
+        this.emitTotalRecordsSubject(departements['hydra:totalItems'] as number);
         this.emitDepartements();
       }, (error: any) => {
         console.log(error);

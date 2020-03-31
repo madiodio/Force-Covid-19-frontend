@@ -13,6 +13,7 @@ export class LineAllocationService {
   lineAllocations: LineAllocationModel[];
   searchCriteria: any;
   lienAllocationsSubject = new Subject<LineAllocationModel[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.LINE_ALLOCATION_URL;
@@ -20,6 +21,10 @@ export class LineAllocationService {
 
   emitLineAllocations() {
     this.lienAllocationsSubject.next(this.lineAllocations);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getLineAllocations(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class LineAllocationService {
     }
     this.http.get<any>(url).subscribe(
       (lineAllocations: any) => {
-        this.lineAllocations=lineAllocations
+        this.lineAllocations=lineAllocations['hydra:member'];
+        this.emitTotalRecordsSubject(lineAllocations['hydra:totalItems'] as number);
         this.emitLineAllocations();
       }, (error: any) => {
         console.log(error);

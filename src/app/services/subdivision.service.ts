@@ -13,6 +13,7 @@ export class SubdivisionService {
   subdivisions: SubdivisionModel[];
   searchCriteria: any;
   subdivisionsSubject = new Subject<SubdivisionModel[]>();
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.SUBDIVISION_URL;
@@ -20,6 +21,10 @@ export class SubdivisionService {
 
   emitSubdivisions() {
     this.subdivisionsSubject.next(this.subdivisions);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getSubdivisions(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class SubdivisionService {
     }
     this.http.get<any>(url).subscribe(
       (subdivisions: any) => {
-        this.subdivisions=subdivisions
+        this.subdivisions=subdivisions['hydra:member'];
+        this.emitTotalRecordsSubject(subdivisions['hydra:totalItems'] as number);
         this.emitSubdivisions();
       }, (error: any) => {
         console.log(error);

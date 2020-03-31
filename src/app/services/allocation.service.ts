@@ -14,6 +14,7 @@ export class AllocationService {
   allocations: Allocation[];
   allocationsSubject = new Subject<Allocation[]>();
   searchCriteria: any;
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.ALLOCATION_URL;
@@ -21,6 +22,10 @@ export class AllocationService {
 
   emitAllocations() {
     this.allocationsSubject.next(this.allocations);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getAllocations(searchCriteria?: SearchCriteria) {
@@ -33,7 +38,8 @@ export class AllocationService {
     }
     this.http.get<any>(url).subscribe(
       (allocations: any) => {
-        this.allocations=allocations
+        this.allocations=allocations['hydra:member'];
+        this.emitTotalRecordsSubject(allocations['hydra:totalItems'] as number);
         this.emitAllocations();
       }, (error: any) => {
         console.log(error);
