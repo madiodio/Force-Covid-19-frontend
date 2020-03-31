@@ -1,3 +1,5 @@
+<app-form-beneficiaire [display]="displayDialog" (displayChange)="onDialogHide($event)"></app-form-beneficiaire>
+
 <section class="page-section hero beneficiaire container">
   <div class="hero-content">
     <h1 class="color-tertiary">Les Ayants droit</h1>
@@ -7,6 +9,12 @@
 <div class="spacer-xy"></div>
 
 <div class="p-grid">
+  <div class="p-col-4 align-right">
+    <button (click)="showNewDialog()" type="button" class="button bgColor-primary">
+      Ajouter un Bénéficiaire
+    </button>
+  </div>
+
   <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems"
     [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
@@ -34,16 +42,15 @@
         </td>
         <td>
           <div class="table_actions">
-            <a class="dropdown-item show" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
+            <a class="dropdown-item show" (click)="showDetailsDialog(rowData)" [routerLink]="" title="Details">
               <i class="pi pi-eye"></i>
             </a>
-            <a class="dropdown-item edit" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
+            <a class="dropdown-item edit" (click)="showNewDialog(rowData)" [routerLink]="" title="Modifier">
               <i class="pi pi-pencil"></i>
             </a>
             <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
               <i class="pi pi-trash"></i>
             </a>
-
           </div>
         </td>
       </tr>

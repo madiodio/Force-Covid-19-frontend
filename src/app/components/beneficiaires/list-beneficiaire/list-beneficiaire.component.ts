@@ -3,6 +3,8 @@ import { Table } from 'primeng/table';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
+import { ModalService } from 'src/app/services/modal.service';
+
 
 @Component({
   selector: 'app-list-beneficiaire',
@@ -16,10 +18,15 @@ export class ListBeneficiaireComponent implements OnInit {
   selectedItems: Beneficiaire[];
 
   loading: boolean = true;
-  
+
   query = new SearchCriteria();
 
-  constructor(private beneficierService: BeneficiaireService) { }
+  displayDialog: boolean = false;
+  displayDetailsDialog: boolean = false;
+
+
+
+  constructor(private beneficierService: BeneficiaireService, private modalService: ModalService) { }
 
   ngOnInit(): void {
 
@@ -37,7 +44,7 @@ export class ListBeneficiaireComponent implements OnInit {
     this.loadFakeData();
   }
 
-  removeItme(id){
+  removeItme(id) {
     console.log(id);
   }
 
@@ -53,5 +60,21 @@ export class ListBeneficiaireComponent implements OnInit {
       this.listItems.push(bene);
     }
 
+  }
+
+  showNewDialog() {
+    this.displayDialog = true;
+  }
+
+  showDetailsDialog() {
+    this.displayDetailsDialog = true;
+  }
+
+  onDialogHide(event) {
+    this.displayDialog = event;
+  }
+
+  showDetails(row) {
+    console.log(row)
   }
 }

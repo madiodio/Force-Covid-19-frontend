@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="display" [style]="{width: '60vw'}">
+<p-dialog [(visible)]="display" [style]="{width: '60vw'}" (onHide)="onDialogHide()">
   <p-header>
     Ajout d'un bénéficiaire
   </p-header>
@@ -37,12 +37,8 @@
         </p-checkbox>
       </div>
       <div class="p-col-12 txt-align-center">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="submit" class="button bgColor-secondary">Ajouter</button>
       </div>
     </div>
   </form>
 </p-dialog>
-
-
-<button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Ajouter un
-  Bénéficiaire</button>
