@@ -1,9 +1,18 @@
 <div class="p-grid">
-    <p-table #dt [columns]="cols" [value]="listItems" selectionMode="multiple" [(selection)]="selectedItems" [paginator]="true" [rows]="10">
+    <p-table #dt [columns]="cols" 
+                  [value]="listItems" 
+                  selectionMode="multiple" 
+                  [lazy]="true" 
+                  [(selection)]="selectedItems" 
+                  [loading]="loading" 
+                  [totalRecords]="totalRecords" 
+                  [paginator]="true" 
+                  [rows]="searchCriteria.size"
+                  (onLazyLoad)="loadItemLazy($event)">
         <ng-template pTemplate="caption">
             <div style="text-align: right">        
                 <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="recherche" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <input type="text" pInputText size="50" placeholder="recherche" [(ngModel)]="searchCriteria.searchKey" (input)="onSetSearchCriteria()" style="width:auto">
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
@@ -21,15 +30,15 @@
                     {{rowData[col.field]}}
                 </td>
                 <td>
-                    <div>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/details" title="Details">
-                        <i class="pi pi-eye" style="font-size: 3em"></i>
+                    <div class="table_actions">
+                      <a class="dropdown-item show" routerLink="/utilisateurs/{{rowData.id}}/details" title="Details">
+                        <i class="pi pi-eye"></i>
                       </a>
-                      <a class="dropdown-item" routerLink="/beneficiaires/{{rowData.id}}/update" title="Modifier">
-                        <i class="pi pi-pencil" style="font-size: 3em"></i>
+                      <a class="dropdown-item edit" routerLink="/utilisateurs/{{rowData.id}}/update" title="Modifier">
+                        <i class="pi pi-pencil"></i>
                       </a>
-                      <a class="dropdown-item" (click)="removeItme(rowData.id)" title="Supprimer">
-                        <i class="pi pi-trash" style="font-size: 3em"></i>
+                      <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
+                        <i class="pi pi-trash"></i>
                       </a>
   
                     </div>

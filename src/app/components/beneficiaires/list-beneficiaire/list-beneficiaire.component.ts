@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { GlobalService } from 'src/app/global.service';
+import { Subscription, Subject } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Beneficiaire } from 'src/app/models/beneficiaire';
 import { BeneficiaireService } from 'src/app/services/beneficiaire.service';
@@ -10,56 +12,85 @@ import { SearchCriteria } from 'src/app/models/search-critaria';
   templateUrl: './list-beneficiaire.component.html',
   styleUrls: ['./list-beneficiaire.component.css']
 })
-export class ListBeneficiaireComponent implements OnInit {
+export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   listItems: Beneficiaire[];
   cols: any[];
-
   selectedItems: Beneficiaire[];
-
+  searchCriteria: SearchCriteria= new SearchCriteria();
+  totalRecords: number=0;
+  searchCriteriaSubject=new Subject<SearchCriteria>();
+  beneficiairesSubscription: Subscription;
+  searchCriteriaSubscription: Subscription;
+  totalRecordsSubscription: Subscription;
   loading: boolean = true;
 
-  query = new SearchCriteria();
-
-  displayDialog: boolean = false;
-  displayDetailsDialog: boolean = false;
-  selectedData;
-
-
-
-  constructor(private beneficierService: BeneficiaireService) { }
+  errorMsg: any;
+  
+  constructor(private beneficiaireService: BeneficiaireService, private global: GlobalService) { }
 
   ngOnInit(): void {
-
     this.cols = [
+      { field: 'firstName', header: 'Prénom' },
       { field: 'lastName', header: 'Nom' },
-      { field: 'firstName', header: 'Prenom' },
-      { field: 'mobileNumber', header: 'Piece d\'identite' },
-      { field: 'mobileNumber', header: 'Téléphone' },
-      { field: 'mobileNumber', header: 'Commune' },
-      { field: 'mobileNumber', header: 'Ville' },
-      { field: 'mobileNumber', header: 'Région' }
+      { field: 'monthlyIncome', header: 'Salaire mensuel' },
+      { field: 'numberOfChildren', header: "Nombre d'enfants" },
+      { field: 'numberOfPeopleInCharge', header: 'Nombre de personnes en charge' },
+      { field: 'mobileNumber', header: 'Contact' },
+      { field: 'address', header: 'Adresse' }
     ];
-    this.beneficierService.getBeneficiaires(this.query);
-    this.listItems = this.beneficierService.beneficiaires;
-    this.loadFakeData();
+
+    this.beneficiairesSubscription=this.beneficiaireService.beneficiairessSubject.subscribe(
+      (beneficiaires: Beneficiaire[])=>{
+        this.listItems=beneficiaires;
+        this.loading=false;
+      }
+    );
+    this.totalRecordsSubscription=this.beneficiaireService.totalRecordsSubject.subscribe(
+      (totalRecords: number)=>{
+        this.totalRecords=totalRecords;
+      }
+    );
+    //pipe(debounceTime(500),distinctUntilChanged()).
+    this.searchCriteriaSubscription=this.searchCriteriaSubject.subscribe(
+      (searchCriteria: SearchCriteria)=>{
+        console.log(this.searchCriteria)
+        this.beneficiaireService.getBeneficiaires(searchCriteria);
+      }
+    );
+    this.beneficiaireService.getBeneficiaires(this.searchCriteria);
   }
 
-  removeItme(id) {
-    console.log(id);
-  }
-
-  loadFakeData() {
-    this.listItems = [];
-    for (let i = 1; i <= 20; i++) {
-      let bene = new Beneficiaire();
-      bene.id =  i;
-      bene.firstName = 'Nom ' + i;
-      bene.lastName = 'Prenom ' + i;
-      bene.mobileNumber = 'piece D Identite' + i;
-      bene.mobileNumber = 'telephone ' + i;
-      this.listItems.push(bene);
+  ngOnDestroy(){
+    if(this.beneficiairesSubscription){
+      this.beneficiairesSubscription.unsubscribe();
     }
+    if(this.searchCriteriaSubscription){
+      this.searchCriteriaSubscription.unsubscribe();
+    }
+    if(this.totalRecordsSubscription){
+      this.totalRecordsSubscription.unsubscribe();
+    }
+  }
 
+  //Call this method in form filter template
+  onSetSearchCriteria(){
+    this.searchCriteriaSubject.next(this.searchCriteria);
+  }
+
+  loadItemLazy(event: any){
+    this.searchCriteriaSubject.next(this.global.prepareSearchCriteria(event,this.searchCriteria));
+  }
+
+  removeItme(id: number){
+    this.beneficiaireService.deleteBeneficiaire(id).then(
+      (response: any)=>{
+        //continued!!!
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
   }
 
   showFormDialog(oldData = null) {

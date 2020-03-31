@@ -13,6 +13,7 @@ export class BeneficiaireService {
   beneficiaires: Beneficiaire[];
   beneficiairessSubject = new Subject<Beneficiaire[]>();
   searchCriteria: any;
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.BENEFICIAIRE_URL;
@@ -20,6 +21,10 @@ export class BeneficiaireService {
 
   emitBeneficiaires() {
     this.beneficiairessSubject.next(this.beneficiaires);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getBeneficiaires(searchCriteria?: SearchCriteria) {
@@ -32,7 +37,8 @@ export class BeneficiaireService {
     }
     this.http.get<any>(url).subscribe(
       (beneficiaires: any) => {
-        this.beneficiaires=beneficiaires
+        this.beneficiaires=beneficiaires['hydra:member'];
+        this.emitTotalRecordsSubject(beneficiaires['hydra:totalItems'] as number);
         this.emitBeneficiaires();
       }, (error: any) => {
         console.log(error);
