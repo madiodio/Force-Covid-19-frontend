@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { customItem } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +7,7 @@ import { customItem } from 'primeng/api';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  items: customItem[];
+  items: MenuItem[];
 
   constructor() { }
 
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
             },
         styleClass: 'customItem',
       },
+      { separator: true },
       {
         label: 'Stock',
         icon: 'pi pi-images',
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
             },
         styleClass: 'customItem'
       },
+      { separator: true },
       {
         label: 'Distributeurs',
         icon: 'pi pi-users',
@@ -40,6 +42,7 @@ export class HeaderComponent implements OnInit {
             },
         styleClass: 'customItem'
       },
+      { separator: true },
       {
         label: 'Bénéficiaires',
         icon: 'pi pi-id-card',
@@ -49,6 +52,7 @@ export class HeaderComponent implements OnInit {
             },
         styleClass: 'customItem'
       },
+      { separator: true },
       {
         label: 'Statistiques',
         icon: 'pi pi-chart-bar',

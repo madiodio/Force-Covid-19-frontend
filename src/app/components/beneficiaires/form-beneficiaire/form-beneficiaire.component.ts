@@ -23,7 +23,6 @@ export class FormBeneficiaireComponent implements OnInit {
       pieceDIdentite: [''],
       phoneNumber: [''],
       email: [''],
-      role: [''],
     });
   }
 
