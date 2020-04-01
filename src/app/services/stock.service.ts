@@ -45,9 +45,7 @@ export class StockService {
       },
       () => {
       }
-    );
-    this.loadFakeData();
-    this.emitStocks();
+    )
   }
 
   async getStock(id: string) {
@@ -85,6 +83,7 @@ export class StockService {
 
     );
   }
+
 
   async updateStock(stock: Stock) {
     return new Promise(
@@ -145,20 +144,4 @@ export class StockService {
 
     );
   }
-
-  loadFakeData() {
-    this.stocks = [];
-    for (let i = 1; i <= 20; i++) {
-      let item = new Stock();
-      item.id = i;
-      item.welfare = 'Nom ' + i;
-      item.quantity = i;
-      item.created = 'created' + i;
-      item.updated = 'updated ' + i;
-      item.userId = i;
-      this.stocks.push(item);
-    }
-    this.emitTotalRecordsSubject(20);
-  }
-
 }
