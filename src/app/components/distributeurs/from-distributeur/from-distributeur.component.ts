@@ -9,11 +9,12 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./from-distributeur.component.css']
 })
 export class FromDistributeurComponent implements OnInit {
-  form: FormGroup;
+  //form: FormGroup;
   distributeur: Distributeur;
   @Input() id: any;
   @Output() displayChange = new EventEmitter();
   errorMsg: any;
+  successMsg: any;
   
   constructor(private distributeurService: DistributeurService, private fb: FormBuilder) { }
 
@@ -21,6 +22,14 @@ export class FromDistributeurComponent implements OnInit {
     if(this.id){
       this.onGetDistributeur(this.id);
     } else {
+      /* this.form = this.fb.group({
+        storageCapacity: '',
+        geographicalArea: '',
+        address: '',
+        latitude: '',
+        longitude: '',
+        manager: ''
+      }); */
       this.distributeur = new Distributeur();
     }
   }
@@ -29,12 +38,52 @@ export class FromDistributeurComponent implements OnInit {
     this.distributeurService.getDistributeur(id).then(
       (distributeur: Distributeur)=>{
         this.distributeur=distributeur;
+        /* this.form = this.fb.group({
+          storageCapacity: this.distributeur.storageCapacity,
+          geographicalArea: this.distributeur.geographicalArea,
+          address: this.distributeur.address,
+          latitude: this.distributeur.latitude,
+          longitude: this.distributeur.longitude,
+          manager: this.distributeur.manager
+        }); */
       }
     ).catch(
       (error: any)=>{
         this.errorMsg=error;
       }
     )
+  }
+
+  onAddDistributeur(){
+    this.distributeurService.addDistributeur(this.distributeur).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onUpdateDistributeur(){
+    this.distributeurService.updateDistributeur(this.distributeur).then(
+      (response: any)=>{
+        this.successMsg= response;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
+  }
+
+  onSubmit() {
+    if (this.id) {
+      this.onUpdateDistributeur();
+    } else {
+      this.onAddDistributeur();
+    }
   }
 
   onDialogHide() {

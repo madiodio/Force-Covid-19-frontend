@@ -28,7 +28,7 @@ export class DistributeurService {
   }
 
   getDistributeurs(searchCriteria?: SearchCriteria) {
-    let url: string=this.baseUrl;
+    /* let url: string=this.baseUrl;
     if(searchCriteria){
       url=this.global.prepareUrlWithSearchCriteria(this.baseUrl,searchCriteria);
       this.searchCriteria=searchCriteria;
@@ -45,7 +45,9 @@ export class DistributeurService {
       },
       () => {
       }
-    )
+    ) */
+    this.loadFakeData();
+    this.emitDistributeurs();
   }
 
   async getDistributeur(id: string) {
@@ -143,5 +145,21 @@ export class DistributeurService {
       }
 
     );
+  }
+
+
+  loadFakeData() {
+    this.distributeurs = [];
+    for (let i = 1; i <= 20; i++) {
+      let bene = new Distributeur();
+      bene.id =  i;
+      bene.geographicalArea = 'geographicalArea ' + i;
+      bene.address = 'address ' + i;
+      bene.storageCapacity = 'storageCapacity ' + i;
+      bene.longitude =  i;
+      bene.latitude =  i;
+      this.distributeurs.push(bene);
+    }
+    this.emitTotalRecordsSubject(20);
   }
 }
