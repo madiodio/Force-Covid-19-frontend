@@ -159,7 +159,7 @@ tbody tr td {
 }
 
 body .ui-table .ui-table-tbody > tr.ui-state-highlight td {
-  background-color: #007ad9 !important;
+  background-color: var(--colors-yellow) !important;
   color: #ffffff;
 }
 body .ui-table .ui-table-caption{
