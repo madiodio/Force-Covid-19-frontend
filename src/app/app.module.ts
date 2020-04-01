@@ -47,7 +47,7 @@ import { DialogModule } from 'primeng/dialog';
     FooterComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
