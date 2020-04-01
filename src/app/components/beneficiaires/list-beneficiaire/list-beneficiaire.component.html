@@ -1,9 +1,3 @@
-<app-form-beneficiaire [beneficiaire]="selectedData" [display]="displayDialog" (displayChange)="onDialogHide($event)">
-</app-form-beneficiaire>
-<app-details-beneficiaire [beneficiaire]="selectedData" [display]="displayDetailsDialog"
-  (displayChange)="onDetailsDialogHide($event)">
-</app-details-beneficiaire>
-
 <section class="page-section hero home container">
   <div class="hero-content">
     <h1 class="color-tertiary">Les Ayants droit</h1>
@@ -38,6 +32,7 @@
                     [totalRecords]="totalRecords" 
                     [paginator]="true" 
                     [rows]="searchCriteria.size"
+                    [responsive]="true"
                     (onLazyLoad)="loadItemLazy($event)">
           <ng-template pTemplate="caption">
               <div style="text-align: right">        
@@ -61,10 +56,10 @@
                   </td>
                   <td>
                       <div class="table_actions">
-                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData)" [routerLink]="" title="Details">
+                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
                           <i class="pi pi-eye"></i>
                         </a>
-                        <a class="dropdown-item edit" (click)="showFormDialog(rowData)" [routerLink]="" title="Modifier">
+                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
                           <i class="pi pi-pencil"></i>
                         </a>
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
@@ -78,3 +73,12 @@
       </p-table>
   </div>
 </section>
+
+<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <app-form-beneficiaire [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
+    </app-form-beneficiaire>
+    <app-details-beneficiaire [id]="selectedData" *ngIf="displayDetailsDialog"
+      (displayChange)="onDialogHide($event)">
+    </app-details-beneficiaire>
+</p-dialog>

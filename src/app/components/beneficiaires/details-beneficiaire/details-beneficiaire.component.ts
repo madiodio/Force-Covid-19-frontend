@@ -12,22 +12,36 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
   styleUrls: ['./details-beneficiaire.component.css']
 })
 export class DetailsBeneficiaireComponent implements OnInit {
-  form: FormGroup;
-  @Input() display: boolean;
-  @Input() beneficiaire: Beneficiaire;
+  beneficiaire: Beneficiaire;
+  @Input() id: any;
   @Output() displayChange = new EventEmitter();
-
-
-  constructor(private beneficiaireService: BeneficiaireService, private fb: FormBuilder) { }
+  errorMsg: any;
+  
+  constructor(private beneficiaireService: BeneficiaireService) { }
 
   ngOnInit(): void {
+    if(this.id){
+      this.onGetBeneficiaire(this.id);
+    }
+  }
 
+  onGetBeneficiaire(id: string){
+    this.beneficiaireService.getBeneficiaire(id).then(
+      (result: Beneficiaire)=>{
+        this.beneficiaire=result;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
   }
 
   onDialogHide() {
     this.beneficiaire = null;
     this.displayChange.emit(false);
   }
+  
   ngOnDestroy() {
     this.displayChange.unsubscribe();
   }

@@ -13,15 +13,15 @@ import { Beneficiaire } from 'src/app/models/beneficiaire';
 })
 export class FormBeneficiaireComponent implements OnInit {
   form: FormGroup;
-  @Input() display: boolean;
-  @Input() beneficiaire: Beneficiaire;
-
+  beneficiaire: Beneficiaire;
+  @Input() id: any;
   @Output() displayChange = new EventEmitter();
-
-
+  errorMsg: any;
+  
   constructor(private beneficiaireService: BeneficiaireService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
     this.form = this.fb.group({
       lastname: [''],
       firstname: [''],
@@ -29,10 +29,24 @@ export class FormBeneficiaireComponent implements OnInit {
       phoneNumber: [''],
       email: [''],
     });
+
+    if(this.id){
+      this.onGetBeneficiaire(this.id);
+    } else {
+      this.beneficiaire = new Beneficiaire();
+    }
   }
 
-  showDialog() {
-    this.display = true;
+  onGetBeneficiaire(id: string){
+    this.beneficiaireService.getBeneficiaire(id).then(
+      (result: Beneficiaire)=>{
+        this.beneficiaire=result;
+      }
+    ).catch(
+      (error: any)=>{
+        this.errorMsg=error;
+      }
+    )
   }
 
   onSubmit() {
@@ -46,11 +60,12 @@ export class FormBeneficiaireComponent implements OnInit {
     // this.beneficiaireService.addBeneficiaire(this.form.value);
   }
 
+ 
   onDialogHide() {
-    this.displayChange.emit(false);
     this.beneficiaire = null;
+    this.displayChange.emit(false);
   }
-
+  
   ngOnDestroy() {
     this.displayChange.unsubscribe();
   }

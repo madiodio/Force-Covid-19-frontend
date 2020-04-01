@@ -24,6 +24,11 @@ export class ListStockComponent implements OnInit {
 
   loading: boolean = true;
 
+  displayDialog: boolean;
+  selectedData: any;
+  displayDetailsDialog: boolean;
+  modalTitle: string;
+
   errorMsg: any;
   constructor(
     private stockService: StockService,
@@ -93,6 +98,27 @@ export class ListStockComponent implements OnInit {
         this.errorMsg=error;
       }
     )
+  }
+
+  showFormDialog(oldData = null) {
+    this.displayDetailsDialog = false;
+    this.selectedData = oldData;
+    this.displayDialog = true;
+    this.modalTitle = 'Mettre à jour le Stock';
+  }
+
+  showDetailsDialog(data) {
+    this.displayDialog = false;
+    this.selectedData = data;
+    this.displayDetailsDialog = true;
+    this.modalTitle = 'Details de Stock';
+  }
+
+  onDialogHide(event) {
+    console.log(event)
+    this.displayDialog = event;
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
   
 }
