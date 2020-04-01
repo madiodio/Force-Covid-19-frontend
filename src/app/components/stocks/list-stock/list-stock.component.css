@@ -1,4 +1,8 @@
-.hero.stock {
+.hero {
   position: relative;
-  background-image: url("/assets/images/hero-stocks.png");
+  background-color: #ffc85b;
+}
+
+::ng-deep footer{
+  background-color: #ffc85b !important;
 }

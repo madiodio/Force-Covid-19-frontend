@@ -4,65 +4,72 @@
   (displayChange)="onDetailsDialogHide($event)">
 </app-details-beneficiaire>
 
-<section class="page-section hero beneficiaire container">
+<section class="page-section hero home container">
   <div class="hero-content">
     <h1 class="color-tertiary">Les Ayants droit</h1>
+
+    <div class="hero-image">
+      <img src="/assets/images/hero-beneficiaire.jpg" alt="">
+    </div>
   </div>
 </section>
 
-<div class="spacer-xy"></div>
+<section class="page-section first">
   <div class="p-col-4 align-right">
     <button (click)="showFormDialog()" type="button" class="button bgColor-primary">
       Ajouter un Bénéficiaire
     </button>
   </div>
+</section>
 
-<div class="p-grid">
-    <p-table #dt [columns]="cols" 
-                  [value]="listItems" 
-                  selectionMode="multiple" 
-                  [lazy]="true" 
-                  [(selection)]="selectedItems" 
-                  [loading]="loading" 
-                  [totalRecords]="totalRecords" 
-                  [paginator]="true" 
-                  [rows]="searchCriteria.size"
-                  (onLazyLoad)="loadItemLazy($event)">
-        <ng-template pTemplate="caption">
-            <div style="text-align: right">        
-                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="recherche" [(ngModel)]="searchCriteria.searchKey" (input)="onSetSearchCriteria()" style="width:auto">
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                    {{col.header}}
-                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                </th>
-                <th> Action</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-                <td *ngFor="let col of columns">
-                    {{rowData[col.field]}}
-                </td>
-                <td>
-                    <div class="table_actions">
-                      <a class="dropdown-item show" (click)="showDetailsDialog(rowData)" [routerLink]="" title="Details">
-                        <i class="pi pi-eye"></i>
-                      </a>
-                      <a class="dropdown-item edit" (click)="showFormDialog(rowData)" [routerLink]="" title="Modifier">
-                        <i class="pi pi-pencil"></i>
-                      </a>
-                      <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
-                        <i class="pi pi-trash"></i>
-                      </a>
-  
-                    </div>
+<section class="page-section">
+  <div class="p-grid">
+      <p-table #dt [columns]="cols" 
+                    [value]="listItems" 
+                    selectionMode="multiple" 
+                    [lazy]="true" 
+                    [(selection)]="selectedItems" 
+                    [loading]="loading" 
+                    [totalRecords]="totalRecords" 
+                    [paginator]="true" 
+                    [rows]="searchCriteria.size"
+                    (onLazyLoad)="loadItemLazy($event)">
+          <ng-template pTemplate="caption">
+              <div style="text-align: right">        
+                  <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                  <input type="text" pInputText size="50" placeholder="recherche" [(ngModel)]="searchCriteria.searchKey" (input)="onSetSearchCriteria()" style="width:auto">
+              </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                  </th>
+                  <th> Action</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData">
+                  <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
                   </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+                  <td>
+                      <div class="table_actions">
+                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData)" [routerLink]="" title="Details">
+                          <i class="pi pi-eye"></i>
+                        </a>
+                        <a class="dropdown-item edit" (click)="showFormDialog(rowData)" [routerLink]="" title="Modifier">
+                          <i class="pi pi-pencil"></i>
+                        </a>
+                        <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
+                          <i class="pi pi-trash"></i>
+                        </a>
+    
+                      </div>
+                    </td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </div>
+</section>

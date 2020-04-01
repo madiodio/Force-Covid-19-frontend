@@ -1,6 +1,10 @@
 .hero.home {
   position: relative;
-  background-image: url("/assets/images/hero-homepage.png");
+  background-color: #ef255f;
+}
+
+::ng-deep footer{
+  background-color: #ef255f !important;
 }
 
 .search-block{
@@ -52,4 +56,8 @@
   font-size: 16px;
   text-align: left;
   line-height: normal;
+}
+
+.page-section.first{
+  padding-top: 0;
 }
