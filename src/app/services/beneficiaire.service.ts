@@ -45,7 +45,9 @@ export class BeneficiaireService {
       },
       () => {
       }
-    )
+    );
+    this.loadFakeData();
+    this.emitBeneficiaires();
   }
 
   async getBeneficiaire(id: string) {
@@ -143,5 +145,19 @@ export class BeneficiaireService {
       }
 
     );
+  }
+
+  loadFakeData() {
+    this.beneficiaires = [];
+    for (let i = 1; i <= 20; i++) {
+      let bene = new Beneficiaire();
+      bene.id =  i;
+      bene.firstName = 'Nom ' + i;
+      bene.lastName = 'Prenom ' + i;
+      bene.mobileNumber = 'piece D Identite' + i;
+      bene.mobileNumber = 'telephone ' + i;
+      this.beneficiaires.push(bene);
+    }
+    this.emitTotalRecordsSubject(20);
   }
 }
