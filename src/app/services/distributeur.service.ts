@@ -51,7 +51,7 @@ export class DistributeurService {
   async getDistributeur(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (distributeur: any) => {
             resolve(distributeur);
           }, (error: any) => {

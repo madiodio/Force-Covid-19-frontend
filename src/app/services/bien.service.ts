@@ -51,7 +51,7 @@ export class BienService {
   async getBien(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (bien: any) => {
             resolve(bien);
           }, (error: any) => {

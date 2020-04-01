@@ -51,7 +51,7 @@ export class CategoryService {
   async getCategory(id: string) {
     return new Promise(
       (resolve, reject) => {
-        this.http.get<any>(this.baseUrl  + id).subscribe(
+        this.http.get<any>(this.baseUrl  + '/' +  id).subscribe(
           (category: any) => {
             resolve(category);
           }, (error: any) => {
