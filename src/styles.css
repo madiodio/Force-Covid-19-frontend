@@ -29,7 +29,8 @@
   }
   */
 
-html, body{
+html,
+body {
   height: 100%;
 }
 
@@ -39,8 +40,8 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
   font-feature-settings: "calt", "clig", "kern", "liga", "locl", "rlig";
@@ -97,11 +98,11 @@ body {
   margin-bottom: 50px;
 }
 
-.hero-content h1{
+.hero-content h1 {
   z-index: 999;
 }
 
-.hero-image{
+.hero-image {
   position: absolute;
   width: 100%;
   height: 292px;
@@ -137,12 +138,17 @@ body {
   font-size: 2rem;
 }
 
-thead tr th{
+thead tr th {
   background-color: #d8d8d8 !important;
   height: 45px;
 }
-tbody tr td{
+tbody tr td {
   background-color: #eee !important;
+}
+
+body .ui-table .ui-table-tbody > tr.ui-state-highlight td {
+  background-color: #007ad9 !important;
+  color: #ffffff;
 }
 
 .page-section-paragraph {
@@ -197,7 +203,6 @@ tbody tr td{
 }
 
 @media (min-width: 42rem) {
-  
   .grid-column {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -240,7 +245,7 @@ tbody tr td{
   padding: var(--spacing-content-padding-sm);
 }
 
-.page-section.first{
+.page-section.first {
   padding-top: 0;
 }
 
@@ -317,41 +322,41 @@ tbody tr td{
 }
 /* Datatable Style */
 
-  form.filter label {
-    font-size: 18px;
-    font-weight: bold;
+form.filter label {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 form.filter select {
-    width: 220px;
-    height: 50px;
-    border: solid 1.5px #000000;
-    background: white;
+  width: 220px;
+  height: 50px;
+  border: solid 1.5px #000000;
+  background: white;
 }
 
 .table_actions {
-    font-size: 20px;
-    text-align: center;
+  font-size: 20px;
+  text-align: center;
 }
 
 .table_actions a {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 
 .table_actions .show {
-    color: blue;
+  color: blue;
 }
 .table_actions .edit {
-    color : green;
+  color: green;
 }
 .table_actions .delete {
-    color: red;
+  color: red;
 }
 
 .form-wrapper {
-    border: solid 1px #979797;
-    border-radius: 12px;
-    padding: 2rem;
+  border: solid 1px #979797;
+  border-radius: 12px;
+  padding: 2rem;
 }
 
 .form-input {
@@ -372,8 +377,9 @@ form.filter select {
 .txt-align-center {
   text-align: center;
 }
- 
-body .ui-chkbox .ui-chkbox-box.ui-state-active, body .ui-chkbox .ui-chkbox-box.ui-state-active:not(.ui-state-disabled):hover {
+
+body .ui-chkbox .ui-chkbox-box.ui-state-active,
+body .ui-chkbox .ui-chkbox-box.ui-state-active:not(.ui-state-disabled):hover {
   background-color: #379956;
   border-color: #379956;
 }
