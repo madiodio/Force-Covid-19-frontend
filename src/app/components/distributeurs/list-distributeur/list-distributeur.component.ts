@@ -25,6 +25,11 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
 
   loading: boolean = true;
 
+  displayDialog: any;
+  selectedData: any;
+  displayDetailsDialog: boolean;
+  modalTitle: string;
+
   errorMsg: any;
 
   constructor(private distributeurService: DistributeurService, private global: GlobalService) { }
@@ -90,6 +95,26 @@ export class ListDistributeurComponent implements OnInit, OnDestroy {
         this.errorMsg=error;
       }
     )
+  }
+  
+  showFormDialog(oldData = null) {
+    this.displayDetailsDialog = false;
+    this.selectedData = oldData;
+    this.displayDialog = true;
+    this.modalTitle = 'Ajout un distributeur';
+  }
+
+  showDetailsDialog(data) {
+    this.displayDialog = false;
+    this.selectedData = data;
+    this.displayDetailsDialog = true;
+    this.modalTitle = 'Détails du distributeur';
+  }
+
+  onDialogHide(event) {
+    this.displayDialog = event;
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
 
 }

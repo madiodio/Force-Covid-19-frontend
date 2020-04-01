@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { DistributeurService } from 'src/app/services/distributeur.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Distributeur } from 'src/app/models/distributeur';
 
 @Component({
@@ -10,12 +10,15 @@ import { Distributeur } from 'src/app/models/distributeur';
 })
 export class DetailsDistributeurComponent implements OnInit {
   distributeur: Distributeur;
+  @Input() id: any;
+  @Output() displayChange = new EventEmitter();
   errorMsg: any;
+  
   constructor(private distributeurService: DistributeurService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const id=this.route.snapshot.params['id'];
-    this.onGetDistributeur(id);
+    if(this.id)
+      this.onGetDistributeur(this.id);
   }
 
   onGetDistributeur(id: string){
@@ -30,4 +33,12 @@ export class DetailsDistributeurComponent implements OnInit {
     )
   }
 
+  onDialogHide() {
+    this.distributeur = null;
+    this.displayChange.emit(false);
+  }
+  
+  ngOnDestroy() {
+    this.displayChange.unsubscribe();
+  }
 }

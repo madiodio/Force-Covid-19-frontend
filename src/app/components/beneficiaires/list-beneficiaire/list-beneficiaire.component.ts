@@ -27,6 +27,7 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   displayDialog: any;
   selectedData: any;
   displayDetailsDialog: boolean;
+  modalTitle: string;
 
   errorMsg: any;
   
@@ -98,21 +99,21 @@ export class ListBeneficiaireComponent implements OnInit, OnDestroy {
   }
 
   showFormDialog(oldData = null) {
+    this.displayDetailsDialog = false;
     this.selectedData = oldData;
     this.displayDialog = true;
+    this.modalTitle = 'Ajout d\'un bénéficiaire';
   }
 
   showDetailsDialog(data) {
+    this.displayDialog = false;
     this.selectedData = data;
     this.displayDetailsDialog = true;
+    this.modalTitle = 'Recap Bénéficiaire';
   }
 
   onDialogHide(event) {
     this.displayDialog = event;
-    this.selectedData = null;
-  }
-
-  onDetailsDialogHide(event) {
     this.displayDetailsDialog = event;
     this.selectedData = null;
   }
