@@ -19,6 +19,7 @@
                     [totalRecords]="totalRecords" 
                     [paginator]="true" 
                     [rows]="searchCriteria.size"
+                    [responsive]="true"
                     (onLazyLoad)="loadItemLazy($event)">
           <ng-template pTemplate="caption">
               <div style="text-align: right">        
@@ -43,10 +44,10 @@
                   </td>
                   <td>
                       <div class="table_actions">
-                        <a class="dropdown-item show" routerLink="/distributeurs/{{rowData.id}}/details" title="Details">
+                        <a class="dropdown-item show" (click)="showDetailsDialog(rowData.id)" [routerLink]="" title="Details">
                           <i class="pi pi-eye"></i>
                         </a>
-                        <a class="dropdown-item edit" routerLink="/distributeurs/{{rowData.id}}/update" title="Modifier">
+                        <a class="dropdown-item edit" (click)="showFormDialog(rowData.id)" [routerLink]="" title="Modifier">
                           <i class="pi pi-pencil"></i>
                         </a>
                         <a class="dropdown-item delete" (click)="removeItme(rowData.id)" title="Supprimer">
@@ -60,3 +61,12 @@
       </p-table>
   </div>
 </section>
+
+
+<p-dialog [header]="modalTitle" [(visible)]="displayDialog || displayDetailsDialog" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <app-from-distributeur [id]="selectedData" *ngIf="displayDialog" (displayChange)="onDialogHide($event)">
+  </app-from-distributeur>
+  <app-details-distributeur [id]="selectedData" *ngIf="displayDetailsDialog" (displayChange)="onDialogHide($event)">
+  </app-details-distributeur>
+</p-dialog>
