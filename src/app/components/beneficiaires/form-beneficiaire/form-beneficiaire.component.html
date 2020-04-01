@@ -1,44 +1,39 @@
-<p-dialog [(visible)]="display" [style]="{width: '60vw'}" (onHide)="onDialogHide()">
-  <p-header>
-    Ajout d'un bénéficiaire
-  </p-header>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form-wrapper">
-    <div class="p-grid">
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Nom Bénéficiaire</label>
-        <input class="form-input" type="text" formControlName="firstname" [value]="beneficiaire?.lastname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Salaire Mensuel</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Nbre d'enfants</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-3">
-        <label class="form-label" for="">Nbre personnes agées</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Contact</label>
-        <input class="form-input" type="text" formControlName="phoneNumber">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Adresse</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label class="form-label" for="">Coordonnées GPS</label>
-        <input class="form-input" type="text" formControlName="firstname">
-      </div>
-      <div class="p-col-12">
-        <p-checkbox name="groupname" value="val1" formControlName="firstname" label="Activez la géolocalisation">
-        </p-checkbox>
-      </div>
-      <div class="p-col-12 txt-align-center">
-        <button type="submit" class="button bgColor-secondary">{{beneficiaire ? 'Modifier' : 'Ajouter'}} </button>
-      </div>
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="form-wrapper">
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nom Bénéficiaire</label>
+      <input class="form-input" type="text" formControlName="firstname">
     </div>
-  </form>
-</p-dialog>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Salaire Mensuel</label>
+      <input class="form-input" type="text" formControlName="firstname">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nbre d'enfants</label>
+      <input class="form-input" type="text" formControlName="firstname">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+      <label class="form-label" for="">Nbre personnes agées</label>
+      <input class="form-input" type="text" formControlName="firstname">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <label class="form-label" for="">Contact</label>
+      <input class="form-input" type="text" formControlName="phoneNumber">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <label class="form-label" for="">Adresse</label>
+      <input class="form-input" type="text" formControlName="firstname">
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <label class="form-label" for="">Coordonnées GPS</label>
+      <input class="form-input" type="text" formControlName="firstname">
+    </div>
+    <div class="p-col-12">
+      <p-checkbox name="groupname" value="val1" formControlName="firstname" label="Activez la géolocalisation">
+      </p-checkbox>
+    </div>
+    <div class="p-col-12 txt-align-center">
+      <button type="submit" class="button bgColor-secondary">{{beneficiaire ? 'Modifier' : 'Ajouter'}} </button>
+    </div>
+  </div>
+</form>

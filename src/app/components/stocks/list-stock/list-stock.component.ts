@@ -4,6 +4,12 @@ import { StockService } from 'src/app/services/stock.service';
 import { SearchCriteria } from 'src/app/models/search-critaria';
 import { Subscription, Subject } from 'rxjs';
 import { GlobalService } from 'src/app/global.service';
+import {SelectItem} from 'primeng/api';
+
+interface City {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-list-stock',
@@ -24,10 +30,39 @@ export class ListStockComponent implements OnInit {
 
   loading: boolean = true;
 
+  displayDialog: boolean;
+  selectedData: any;
+  displayDetailsDialog: boolean;
+  modalTitle: string;
+
   errorMsg: any;
+
+  cities1: SelectItem[];
+  cities2: SelectItem[];
+  selectedCity1: City;
+  selectedCity2: City;
+
   constructor(
     private stockService: StockService,
-    private global: GlobalService) { }
+    private global: GlobalService) {
+      this.cities1 = [
+        {label:'Select City', value:null},
+        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+      ];
+  
+      this.cities2 = [
+        {label:'Select City', value:null},
+        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+      ];
+    }
 
   ngOnInit(): void {
 
@@ -93,6 +128,27 @@ export class ListStockComponent implements OnInit {
         this.errorMsg=error;
       }
     )
+  }
+
+  showFormDialog(oldData = null) {
+    this.displayDetailsDialog = false;
+    this.selectedData = oldData;
+    this.displayDialog = true;
+    this.modalTitle = 'Mettre à jour le Stock';
+  }
+
+  showDetailsDialog(data) {
+    this.displayDialog = false;
+    this.selectedData = data;
+    this.displayDetailsDialog = true;
+    this.modalTitle = 'Details de Stock';
+  }
+
+  onDialogHide(event) {
+    console.log(event)
+    this.displayDialog = event;
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
   
 }

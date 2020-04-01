@@ -1,4 +1,63 @@
 .hero.home {
   position: relative;
-  background-image: url("/assets/images/hero-homepage.png");
+  background-color: #ef255f;
+}
+
+::ng-deep footer{
+  background-color: #ef255f !important;
+}
+
+.search-block{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-block input{
+  height: 45px;
+  border-radius: 4px;
+  border: solid 1px #000000;
+  width: 420px;
+}
+
+.page-section-paragraph{
+  font-size: 16px;
+  line-height: normal;
+}
+
+.page-section-title{
+  font-size: 20px;
+}
+
+.page-actions .page-section-card{
+  position: relative;
+  border-radius: 10px;
+}
+
+.page-section-cardImage{
+  position: absolute;
+  top: -90px;
+  text-align: center;
+  width: 100%;
+}
+
+.page-section-cardImage > img{
+  width: 183px;
+}
+
+.page-actions{
+  margin-top: 70px;
+}
+
+.page-actions .page-section-cardContent{
+  padding-top: 80px;
+}
+
+.page-actions .page-section-cardContent p{
+  font-size: 16px;
+  text-align: left;
+  line-height: normal;
+}
+
+.page-section.first{
+  padding-top: 0;
 }

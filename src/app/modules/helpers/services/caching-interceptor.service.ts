@@ -51,8 +51,8 @@ export class CachingInterceptorService implements HttpInterceptor {
         }
       }), catchError(error => {
         const router = this.injector.get(Router);
-        if ('/user/login' !== router.url && error instanceof HttpErrorResponse && (error.status === 401 || error.status === 403)) {
-          router.navigate(['/user/login']);
+        if ('/login' !== router.url && error instanceof HttpErrorResponse && (error.status === 401 || error.status === 403)) {
+          router.navigate(['/login']);
         } else {
           return throwError(error);
         }

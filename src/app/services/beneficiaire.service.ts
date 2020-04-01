@@ -13,6 +13,7 @@ export class BeneficiaireService {
   beneficiaires: Beneficiaire[];
   beneficiairessSubject = new Subject<Beneficiaire[]>();
   searchCriteria: any;
+  totalRecordsSubject = new Subject<number>();
 
   constructor(private http: HttpClient, private global: GlobalService) {
     this.baseUrl = this.global.BENEFICIAIRE_URL;
@@ -20,6 +21,10 @@ export class BeneficiaireService {
 
   emitBeneficiaires() {
     this.beneficiairessSubject.next(this.beneficiaires);
+  }
+
+  emitTotalRecordsSubject(total: number) {
+    this.totalRecordsSubject.next(total);
   }
 
   getBeneficiaires(searchCriteria?: SearchCriteria) {
@@ -32,14 +37,17 @@ export class BeneficiaireService {
     }
     this.http.get<any>(url).subscribe(
       (beneficiaires: any) => {
-        this.beneficiaires=beneficiaires
+        this.beneficiaires=beneficiaires['hydra:member'];
+        this.emitTotalRecordsSubject(beneficiaires['hydra:totalItems'] as number);
         this.emitBeneficiaires();
       }, (error: any) => {
         console.log(error);
       },
       () => {
       }
-    )
+    );
+    this.loadFakeData();
+    this.emitBeneficiaires();
   }
 
   async getBeneficiaire(id: string) {
@@ -137,5 +145,19 @@ export class BeneficiaireService {
       }
 
     );
+  }
+
+  loadFakeData() {
+    this.beneficiaires = [];
+    for (let i = 1; i <= 20; i++) {
+      let bene = new Beneficiaire();
+      bene.id =  i;
+      bene.firstName = 'Nom ' + i;
+      bene.lastName = 'Prenom ' + i;
+      bene.mobileNumber = 'piece D Identite' + i;
+      bene.mobileNumber = 'telephone ' + i;
+      this.beneficiaires.push(bene);
+    }
+    this.emitTotalRecordsSubject(20);
   }
 }

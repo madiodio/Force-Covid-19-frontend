@@ -1,4 +1,9 @@
-.hero.distributeur {
+.hero {
   position: relative;
-  background-image: url("/assets/images/hero-distributeur.png");
+  background-color: #044a42;
+}
+
+
+::ng-deep footer{
+  background-color: #044a42 !important;
 }

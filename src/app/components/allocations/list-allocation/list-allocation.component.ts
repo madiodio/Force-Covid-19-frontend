@@ -25,6 +25,11 @@ export class ListAllocationComponent implements OnInit {
 
   loading: boolean = true;
 
+  displayDialog: any;
+  selectedData: any;
+  displayDetailsDialog: boolean;
+  modalTitle: string;
+
   errorMsg: any;
 
   constructor(private allocationService: AllocationService, private global: GlobalService) { }
@@ -95,5 +100,25 @@ export class ListAllocationComponent implements OnInit {
         this.errorMsg=error;
       }
     )
+  }
+    
+  showFormDialog(oldData = null) {
+    this.displayDetailsDialog = false;
+    this.selectedData = oldData;
+    this.displayDialog = true;
+    this.modalTitle = 'faire une allocation';
+  }
+
+  showDetailsDialog(data) {
+    this.displayDialog = false;
+    this.selectedData = data;
+    this.displayDetailsDialog = true;
+    this.modalTitle = 'Détails du l\'allocation';
+  }
+
+  onDialogHide(event) {
+    this.displayDialog = event;
+    this.displayDetailsDialog = event;
+    this.selectedData = null;
   }
 }

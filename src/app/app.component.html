@@ -6,21 +6,15 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<div class="p-grid sample-layout">
-  <div class="p-col-12">
+
+<div class="page-layout">
+  <div class="page-header">
     <app-header></app-header>
   </div>
-  <div class="p-col-12 p-md-1">
+  <div class="page-content">
+    <router-outlet></router-outlet>
   </div>
-  <div class="p-col-12 p-md-10  p-col-nogutter">
-    <div class="p-col-12 p-col-nogutter">
-    </div>
-    <div class="p-col-12" style="margin-top: 30px">
-        <router-outlet></router-outlet>
-    </div>
-  </div>
-  <div class="p-col-12 p-md-1"></div>
-  <div class="p-col-12">
+  <div class="page-footer">
     <app-footer></app-footer>
   </div>
 </div>
