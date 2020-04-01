@@ -86,6 +86,14 @@ body {
   color: white !important;
 }
 
+.bgColor-yellow{
+  background-color: var(--colors-yellow) !important;
+}
+
+.button.bgColor-yellow{
+  color: #fff;
+}
+
 /* Page Sections*/
 .page-section:not(.hero) {
   padding: 50px;
@@ -284,6 +292,7 @@ body .ui-table .ui-table-tbody > tr.ui-state-highlight td {
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.025rem;
+  height: 50px;
 }
 
 .hero-content {
