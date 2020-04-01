@@ -7,6 +7,14 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<div class="page-layout">
+  <div class="page-header">
+    <app-header></app-header>
+  </div>
+  <div class="page-content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="page-footer">
+    <app-footer></app-footer>
+  </div>
+</div>

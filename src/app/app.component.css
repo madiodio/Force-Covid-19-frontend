@@ -1,0 +1,9 @@
+.page-layout{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-layout .page-content{
+    flex: 1;
+}
