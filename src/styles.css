@@ -118,6 +118,10 @@ body {
   justify-content: flex-end;
 }
 
+.hero-image img{
+  height: 292px;
+}
+
 .grid-row {
   display: flex;
   flex-wrap: wrap;
@@ -157,6 +161,23 @@ tbody tr td {
 body .ui-table .ui-table-tbody > tr.ui-state-highlight td {
   background-color: #007ad9 !important;
   color: #ffffff;
+}
+body .ui-table .ui-table-caption{
+  background-color: transparent;
+  border: 0;
+  position: relative;
+}
+
+body .ui-table .ui-table-caption .pi{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+input{
+  height: 50px;
+  border: 2px solid #979797 !important;
+  border-radius: 4px !important;
 }
 
 .page-section-paragraph {
