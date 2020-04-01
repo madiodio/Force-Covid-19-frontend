@@ -137,6 +137,14 @@ body {
   font-size: 2rem;
 }
 
+thead tr th{
+  background-color: #d8d8d8 !important;
+  height: 45px;
+}
+tbody tr td{
+  background-color: #eee !important;
+}
+
 .page-section-paragraph {
   font-size: 1.1rem;
   line-height: 1.5;
